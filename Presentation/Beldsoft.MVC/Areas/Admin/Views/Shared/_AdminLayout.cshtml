@@ -1,16 +1,40 @@
 ﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>@ViewData["Title"] - Admin Panel</title>
-    <link rel="stylesheet" href="~/css/admin.css" />
-</head>
+<html lang="en" dir="ltr" data-startbar="dark" data-bs-theme="light">
+
+@await Component.InvokeAsync("HeadComponentPartial")
+
+
 <body>
-    <nav>
-        <a asp-area="Admin" asp-controller="Users" asp-action="Index">Kullanıcılar</a> |
-        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-    </nav>
-    <div class="content">
-        @RenderBody()
+
+    @await Component.InvokeAsync("TopbarComponentPartial")
+
+    @await Component.InvokeAsync("SidebarComponentPartial")
+
+    <div class="startbar-overlay d-print-none"></div>
+
+    <div class="page-wrapper">
+
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        @RenderBody()
+
+                        </div>
+                </div>
+     
+            </div>
+        @await Component.InvokeAsync("FooterComponentPartial")
+
+
+        </div>
     </div>
+
+    @await Component.InvokeAsync("ScriptComponentPartial")
+
+
+    @RenderSection("Scripts", required: false)
+
 </body>
+
 </html>

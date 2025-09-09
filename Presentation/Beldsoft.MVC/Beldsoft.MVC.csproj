@@ -7,16 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\approx-v1.0\dist\assets\js\.DS_Store" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.19">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Bedldsoft.Domain\Bedldsoft.Domain.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Beldsoft.Persistence\Beldsoft.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\gmaps\docs\" />
+    <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\gmaps\examples\" />
+    <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\gmaps\test\" />
+    <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\raphael\dev\test\" />
+    <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\simple-datatables\dts\column_filter\" />
+    <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\simple-datatables\dts\convert\" />
+    <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\simple-datatables\dts\editing\" />
+    <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\simple-datatables\dts\export\" />
+    <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\starability\starability-scss\starability\" />
   </ItemGroup>
 
 </Project>
