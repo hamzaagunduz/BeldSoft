@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8C0FC012-A598-4290-AAB3-D937CC8B4DFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bedldsoft.Domain", "Core\Bedldsoft.Domain\Bedldsoft.Domain.csproj", "{356F39FA-3A6B-433B-AACE-B5842F6B7A73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beldsoft.Application", "Core\Beldsoft.Application\Beldsoft.Application.csproj", "{1E72F907-B03D-46DF-A13D-7426F90FCF05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{CDFEFEF3-739E-4777-BB26-6CF2C13EC35F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beldsoft.Persistence", "Infrastructure\Beldsoft.Persistence\Beldsoft.Persistence.csproj", "{C2BD3F33-4F78-43CC-AC08-EDD311824F0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beldsoft.Infrastructure", "Infrastructure\Beldsoft.Infrastructure\Beldsoft.Infrastructure.csproj", "{EA6E308A-6B77-4A77-A387-B324E5B0E024}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{E6F6C977-6B97-4AB1-993B-045A1460DF0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beldsoft.MVC", "Presentation\Beldsoft.MVC\Beldsoft.MVC.csproj", "{E59010B5-B303-435E-89F8-5102AF53D7B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{356F39FA-3A6B-433B-AACE-B5842F6B7A73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356F39FA-3A6B-433B-AACE-B5842F6B7A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356F39FA-3A6B-433B-AACE-B5842F6B7A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356F39FA-3A6B-433B-AACE-B5842F6B7A73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E72F907-B03D-46DF-A13D-7426F90FCF05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E72F907-B03D-46DF-A13D-7426F90FCF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E72F907-B03D-46DF-A13D-7426F90FCF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E72F907-B03D-46DF-A13D-7426F90FCF05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2BD3F33-4F78-43CC-AC08-EDD311824F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2BD3F33-4F78-43CC-AC08-EDD311824F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2BD3F33-4F78-43CC-AC08-EDD311824F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2BD3F33-4F78-43CC-AC08-EDD311824F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA6E308A-6B77-4A77-A387-B324E5B0E024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA6E308A-6B77-4A77-A387-B324E5B0E024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA6E308A-6B77-4A77-A387-B324E5B0E024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA6E308A-6B77-4A77-A387-B324E5B0E024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59010B5-B303-435E-89F8-5102AF53D7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59010B5-B303-435E-89F8-5102AF53D7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59010B5-B303-435E-89F8-5102AF53D7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59010B5-B303-435E-89F8-5102AF53D7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{356F39FA-3A6B-433B-AACE-B5842F6B7A73} = {8C0FC012-A598-4290-AAB3-D937CC8B4DFD}
+		{1E72F907-B03D-46DF-A13D-7426F90FCF05} = {8C0FC012-A598-4290-AAB3-D937CC8B4DFD}
+		{C2BD3F33-4F78-43CC-AC08-EDD311824F0F} = {CDFEFEF3-739E-4777-BB26-6CF2C13EC35F}
+		{EA6E308A-6B77-4A77-A387-B324E5B0E024} = {CDFEFEF3-739E-4777-BB26-6CF2C13EC35F}
+		{E59010B5-B303-435E-89F8-5102AF53D7B0} = {E6F6C977-6B97-4AB1-993B-045A1460DF0A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68C6F957-863D-4DF1-B9FA-8988D964444F}
+	EndGlobalSection
+EndGlobal

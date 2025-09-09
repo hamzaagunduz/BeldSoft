@@ -1,0 +1,58 @@
+﻿using Beldsoft.Application.Features.Auth.Commands.Login;
+using Beldsoft.MVC.ViewModels.AppUsers;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Beldsoft.MVC.Controllers
+{
+    public class AuthController : Controller
+    {
+        private readonly IMediator _mediator;
+
+        public AuthController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        // GET: Login formu direkt /login
+        [HttpGet("/login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost("/login")]
+        public async Task<IActionResult> Login(AppUserLoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var command = new LoginCommand
+            {
+                Email = model.Email,
+                Password = model.Password
+            };
+
+            var result = await _mediator.Send(command);
+
+            if (!result.Succeeded)
+            {
+                // Error listesini ModelState'e ekle
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error);
+                }
+
+                return View(model);
+            }
+
+            var loginData = result.Data;
+
+            if (loginData.Role == "Admin")
+                return RedirectToAction("Index", "AdminHome");
+
+            return RedirectToAction("Index", "Home");
+        }
+
+    }
+}

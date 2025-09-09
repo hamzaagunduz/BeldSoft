@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BlogListViewModel>
+
+<h2>Blog Listesi</h2>
+<a asp-controller="Blog" asp-action="Create">Yeni Blog Ekle</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Başlık</th>
+            <th>Oluşturulma</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.Title</td>
+                <td>@blog.CreatedAt</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@blog.BlogId">Detay</a> |
+                    <a asp-action="Edit" asp-route-id="@blog.BlogId">Düzenle</a> |
+                    <a asp-action="Delete" asp-route-id="@blog.BlogId">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

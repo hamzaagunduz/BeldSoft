@@ -1,0 +1,32 @@
+﻿using Beldsoft.Application.Interfaces;
+using Beldsoft.Infrastructure.Repositories;
+using Beldsoft.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using Beldsoft.Application.Interfaces.IBlogRepository;
+using Beldsoft.Application.Interfaces.IAppUserRepository;
+using Beldsoft.Persistence.Repositories;
+
+namespace Beldsoft.Persistence.ServiceRegister
+{
+    public static class ServiceRegistration
+    {
+        public static void AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
+        {
+
+            services.AddDbContext<BeldsoftContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+            );
+
+
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<IAppUserRepository, AppUserRepository>();
+
+
+        }
+    }
+}
