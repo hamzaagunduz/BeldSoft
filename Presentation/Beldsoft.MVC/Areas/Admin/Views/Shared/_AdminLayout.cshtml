@@ -10,25 +10,19 @@
 
     @await Component.InvokeAsync("SidebarComponentPartial")
 
-    <div class="startbar-overlay d-print-none"></div>
 
     <div class="page-wrapper">
 
         <div class="page-content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
                         @RenderBody()
 
-                        </div>
-                </div>
      
-            </div>
         @await Component.InvokeAsync("FooterComponentPartial")
 
 
         </div>
     </div>
+    @await Component.InvokeAsync("GlobalSpinnerComponent")
 
     @await Component.InvokeAsync("ScriptComponentPartial")
 

@@ -1,9 +1,176 @@
 ﻿@{
-    ViewData["Title"] = "Kullanıcı Yönetimi";
-    Layout = "_AdminLayout";
-
+    ViewData["Title"] = "Kullanıcılar";
 }
 
-<h2>Kullanıcı Yönetimi</h2>
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h4 class="card-title">Kullanıcı Detayları</h4>
+            </div>
+            <div class="col-auto">
+                <button class="btn bg-primary text-white" data-bs-toggle="modal" data-bs-target="#addUser">
+                    <i class="fas fa-plus me-1"></i> Kullanıcı Ekle
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body pt-0">
+        <div class="table-responsive">
+            <div class="datatable-wrapper">
+                <div class="datatable-top">
+                    <div class="datatable-dropdown">
+                        <label>
+                            <select class="datatable-selector" name="per-page" id="pageSizeSelect">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                            </select> Kadar liste
+                        </label>
+                    </div>
+                    <div class="datatable-search">
+                        <input class="datatable-input" placeholder="Ara..." type="search" id="searchInput">
+                    </div>
+                </div>
 
-<p>Burada kullanıcı listesi, roller ve diğer admin işlemleri yer alacak.</p>
+                <div class="datatable-container">
+                    <table class="table mb-0 datatable-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Kullanıcı</th>
+                              <th>Email</th>
+                                <th>Ad</th>
+                             <th>Soyad</th>
+                             <th>Telefon</th>
+                                <th class="text-end">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- AJAX ile burası doldurulacak -->
+                        </tbody>
+                    </table>
+                </div>
+
+               
+
+         
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@* Kullanıcı Ekleme Modal *@
+<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserLabel">Kullanıcı Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="addUserForm">
+
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">İsim</label>
+                        <input type="text" class="form-control" id="name" name="Name" placeholder="İsim">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="surname" class="form-label">Soyisim</label>
+                        <input type="text" class="form-control" id="surname" name="Surname" placeholder="Soyisim">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefon Numarası</label>
+                        <input type="tel" class="form-control" id="phone" name="PhoneNumber" placeholder="Telefon numarası">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="Email" placeholder="Email adresi" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Şifre</label>
+                        <input type="password" class="form-control" id="password" name="Password" placeholder="Şifre" required>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary w-100" id="addUserBtn">Kullanıcı Ekle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Kullanıcı Güncelleme Modal *@
+<div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateUserLabel">Kullanıcı Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="updateUserForm">
+                    <input type="hidden" id="updateUserId" name="UserId">
+
+                    <div class="mb-3">
+                        <label for="updateName" class="form-label">İsim</label>
+                        <input type="text" class="form-control" id="updateName" name="Name" placeholder="İsim">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="updateSurname" class="form-label">Soyisim</label>
+                        <input type="text" class="form-control" id="updateSurname" name="Surname" placeholder="Soyisim">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="updatePhone" class="form-label">Telefon Numarası</label>
+                        <input type="tel" class="form-control" id="updatePhone" name="PhoneNumber" placeholder="Telefon numarası">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="updateEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="updateEmail" name="Email" placeholder="Email adresi" required>
+                    </div>
+
+
+
+                    <div class="mb-3">
+                        <label for="updateRole" class="form-label">Rol</label>
+                        <select class="form-select" id="updateRole" name="Role" required>
+                            <option value="User">User</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary w-100" id="updateUserBtn">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="/js/admin/users.js"></script>
+
+<style>
+    .datatable-pagination {
+        position: absolute;
+        bottom: 25px;
+        right: 0;
+    }
+</style>

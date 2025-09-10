@@ -21,14 +21,22 @@ namespace Beldsoft.Application.Features.AppUsers.Commands.CreateAppUser
         {
             var user = new AppUser
             {
-                UserName = request.UserName,
-                Email = request.Email
+                UserName = Guid.NewGuid().ToString("N"),
+                Name = request.Name,
+                Surname = request.Surname,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded)
                 return CommonResponse<int>.Fail(result.Errors.Select(e => e.Description));
+
+            var roleResult = await _userManager.AddToRoleAsync(user, "User"); 
+
+            if (!roleResult.Succeeded)
+                return CommonResponse<int>.Fail(roleResult.Errors.Select(e => e.Description));
 
             return CommonResponse<int>.Success(user.Id);
         }

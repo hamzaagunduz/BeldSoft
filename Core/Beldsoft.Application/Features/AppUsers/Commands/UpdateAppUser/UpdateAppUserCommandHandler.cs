@@ -23,8 +23,10 @@ namespace Beldsoft.Application.Features.AppUsers.Commands.UpdateAppUser
             if (user == null)
                 return CommonResponse<bool>.Fail(new[] { "Kullanýcý bulunamadý." });
 
-            user.UserName = request.UserName;
             user.Email = request.Email;
+            user.Name = request.Name;
+            user.Surname = request.Surname;
+            user.PhoneNumber = request.PhoneNumber;
 
             var updateResult = await _userManager.UpdateAsync(user);
             if (!updateResult.Succeeded)
@@ -38,7 +40,21 @@ namespace Beldsoft.Application.Features.AppUsers.Commands.UpdateAppUser
                     return CommonResponse<bool>.Fail(passResult.Errors.Select(e => e.Description));
             }
 
+            // Rol güncellemesi
+            if (!string.IsNullOrEmpty(request.Role))
+            {
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                if (!removeResult.Succeeded)
+                    return CommonResponse<bool>.Fail(removeResult.Errors.Select(e => e.Description));
+
+                var addResult = await _userManager.AddToRoleAsync(user, request.Role);
+                if (!addResult.Succeeded)
+                    return CommonResponse<bool>.Fail(addResult.Errors.Select(e => e.Description));
+            }
+
             return CommonResponse<bool>.Success(true);
         }
+
     }
 }

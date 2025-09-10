@@ -4,16 +4,11 @@ namespace Beldsoft.MVC.ViewModels.AppUsers
 {
     public class AppUserEditViewModel
     {
-        [Required]
         public int UserId { get; set; }
-
-        [Required]
-        public string UserName { get; set; }
-
-        [Required, EmailAddress]
         public string Email { get; set; }
-
-        [DataType(DataType.Password)]
-        public string? Password { get; set; } // Şifre opsiyonel
+        public string PhoneNumber { get; set; }
+        public string? Name { get; set; }
+        public string? Surname { get; set; }
+        public string? Role { get; set; }
     }
 }

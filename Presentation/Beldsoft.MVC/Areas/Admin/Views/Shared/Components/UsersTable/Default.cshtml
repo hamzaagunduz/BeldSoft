@@ -1,0 +1,95 @@
+﻿@model PagedAppUserListViewModel
+
+<div class="table-responsive">
+    <table class="table mb-0">
+
+        <tbody>
+            @if (Model.Users != null && Model.Users.Any())
+            {
+                foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td class="d-flex align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="~/approx-v1.0/dist/assets/images/users/avatar-1.jpg"
+                                     class="me-2 thumb-md align-self-center rounded" alt="...">
+                                <div class="flex-grow-1 text-truncate">
+                                    @* <h6 class="m-0">@user.UserName</h6> *@
+                                    <p class="fs-12 text-muted mb-0">ID: @user.UserId</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#" class="text-body text-decoration-underline">@user.Email</a>
+                        </td>
+                        <td>@user.Name</td>
+                        <td>@user.Surname</td>
+                        <td>@user.PhoneNumber</td>
+
+                        <td class="text-end">
+                            <a href="#"
+                               class="me-2 text-secondary edit-user-btn"
+                               data-userid="@user.UserId"
+                               data-name="@user.Name"
+                               data-surname="@user.Surname"
+                               data-phone="@user.PhoneNumber"
+                               data-email="@user.Email"
+                               data-role="@user.Role">
+                                <i class="las la-pen fs-18"></i>
+                            </a>
+
+                            <a href="#" class="text-danger delete-user-btn" data-userid="@user.UserId">
+                                <i class="las la-trash-alt fs-18"></i>
+                            </a>
+                        </td>
+
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Kullanıcı Bulunamadı.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+    <!-- Pagination -->
+    @if (Model.TotalPages > 1)
+    {
+        <div class="datatable-bottomss">
+            <div class="datatable-info">
+                Toplam @Model.TotalCount kayıttan
+                @(((Model.PageNumber - 1) * Model.PageSize) + 1) -
+                @(Math.Min(Model.PageNumber * Model.PageSize, Model.TotalCount))
+                arası gösteriliyor
+            </div>
+
+            <nav class="datatable-pagination">
+                <ul class="datatable-pagination-list">
+                    <li class="datatable-pagination-list-item @(Model.PageNumber == 1 ? "datatable-hidden datatable-disabled" : "")">
+                        <a href="#" class="datatable-pagination-list-item-link" data-page="@(Model.PageNumber - 1)">‹</a>
+                    </li>
+
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="datatable-pagination-list-item @(i == Model.PageNumber ? "datatable-active" : "")">
+                            <a href="#" class="datatable-pagination-list-item-link" data-page="@i">@i</a>
+                        </li>
+                    }
+
+                    <li class="datatable-pagination-list-item @(Model.PageNumber == Model.TotalPages ? "datatable-hidden datatable-disabled" : "")">
+                        <a href="#" class="datatable-pagination-list-item-link" data-page="@(Model.PageNumber + 1)">›</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+
+
+
+

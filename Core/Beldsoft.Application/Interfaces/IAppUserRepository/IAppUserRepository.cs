@@ -9,6 +9,9 @@ namespace Beldsoft.Application.Interfaces.IAppUserRepository
 {
     public interface IAppUserRepository : IRepository<AppUser>
     {
+        Task<List<AppUser>> GetPagedUsersAsync(int pageNumber, int pageSize);
+
+        Task<int> GetUserCountAsync();
 
     }
 }
