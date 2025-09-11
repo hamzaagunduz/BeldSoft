@@ -1,0 +1,104 @@
+﻿@model IEnumerable<AboutSectionGetAllViewModel>
+
+<section class="vs-about--section space space-extra-bottom z-index-common parallax-wrap overflow-hidden"
+         data-bg-src='@Url.Content("~/toddly/assets/img/about/vs-about-h1-bg.png")'>
+    @foreach (var about in Model)
+    {
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-30 wow animate__fadeInUp" data-wow-delay="0.25s">
+                    <div class="vs-about--image">
+                        <div class="vs-about--image__figure1 wow animate__fadeInUp" data-wow-delay="0.25s">
+                            <img src="@about.SmallImageUrl" alt="about image" width="198" height="214" loading="lazy">
+                        </div>
+                        <div class="vs-about--image__figure2 wow animate__fadeInUp" data-wow-delay="0.35s">
+                            <img src="@about.BigImageUrl" alt="about image" width="400" height="461" loading="lazy">
+                        </div>
+                        <div class="vs-about--image__ele1 parallax-element" data-move="80">
+                            <img src="~/toddly/assets//img/about/vs-about-h1-ele-1.svg" alt="elements">
+                        </div>
+                        <div class="vs-about--image__ele2 parallax-element" data-move="50">
+                            <img src="~/toddly/assets//img/about/vs-about-h1-ele-2.svg" alt="elements">
+                        </div>
+                        <div class="vs-about--image__ele3 wow animate__zoomIn" data-wow-delay="0.55s"></div>
+
+                        <div class="vs-about--yoe">
+                            <span class="vs-about--yoe__number">
+                                @about.ExperienceNumber
+                            </span>
+                            <span class="vs-about--yoe__text">@about.ExperienceText</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-30 wow animate__fadeInUp" data-wow-delay="0.45s">
+                    <div class="vs-about--right">
+                        <div class="vs-title title-anime animation-style2">
+                            <div class="title-anime__wrap">
+                                <span class="vs-title__sub">@about.SubTitle</span>
+                                <h2 class="vs-title__main">
+                                    @about.MainTitle
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="vs-about--story">
+                            <div class="vs-about--story__tab mb-30">
+                                <ul class="nav nav-tabs" id="aboutTab-@about.Id" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="history-tab-@about.Id"
+                                                data-bs-toggle="tab"
+                                                data-bs-target="#history-tab-pane-@about.Id"
+                                                type="button" role="tab" aria-controls="history-tab-pane-@about.Id"
+                                                aria-selected="true">
+                                            @about.Title1
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="school-tab-@about.Id"
+                                                data-bs-toggle="tab"
+                                                data-bs-target="#school-tab-pane-@about.Id"
+                                                type="button" role="tab" aria-controls="school-tab-pane-@about.Id"
+                                                aria-selected="false">
+                                            @about.Title2
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="kids-tab-@about.Id"
+                                                data-bs-toggle="tab"
+                                                data-bs-target="#kids-tab-pane-@about.Id"
+                                                type="button" role="tab" aria-controls="kids-tab-pane-@about.Id"
+                                                aria-selected="false">
+                                            @about.Title3
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content" id="aboutTabContent-@about.Id">
+                                <div class="tab-pane fade show active" id="history-tab-pane-@about.Id" role="tabpanel" aria-labelledby="history-tab-@about.Id" tabindex="0">
+                                    <p class="vs-about__text vs-text">@about.Title1Description</p>
+                                    <ul class="vs-list pt-15 mb-35">
+                                        <li>@about.Title1Step1</li>
+                                        <li>@about.Title1Step2</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="school-tab-pane-@about.Id" role="tabpanel" aria-labelledby="school-tab-@about.Id" tabindex="0">
+                                    <p class="vs-about__text vs-text">@about.Title2Description</p>
+                                    <ul class="vs-list pt-15 mb-35">
+                                        <li>@about.Title2Step1</li>
+                                        <li>@about.Title2Step2</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="kids-tab-pane-@about.Id" role="tabpanel" aria-labelledby="kids-tab-@about.Id" tabindex="0">
+                                    <p class="vs-about__text vs-text">@about.Title3Description</p>
+                                    <ul class="vs-list pt-15 mb-35">
+                                        <li>@about.Title3Step1</li>
+                                        <li>@about.Title3Step2</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>

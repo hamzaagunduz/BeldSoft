@@ -9,29 +9,21 @@ using System.Linq;
 
 namespace Beldsoft.MVC.ViewComponents.HomeComponents
 {
-    public class ServiceComponentPartial : ViewComponent
+    public class SessionComponentPartial : ViewComponent
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public ServiceComponentPartial(IMediator mediator, IMapper mapper)
+        public SessionComponentPartial(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public IViewComponentResult InvokeAsync()
         {
-            var result = await _mediator.Send(new GetAllServiceSectionsQuery());
-
-            if (!result.Succeeded || result.Data == null)
-                return View(Enumerable.Empty<ServiceSectionGetAllViewModel>());
-
-            var model = _mapper.Map<List<ServiceSectionGetAllViewModel>>(result.Data);
-
-            return View(model);
+            return View();
         }
-
 
     }
 }

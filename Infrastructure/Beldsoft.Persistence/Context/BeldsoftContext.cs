@@ -17,6 +17,7 @@ namespace Beldsoft.Persistence.Context
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<HeroSection> HeroSections { get; set; }
         public DbSet<ServiceSection> ServiceSections { get; set; }
+        public DbSet<AboutSection> AboutSections { get; set; }
 
     }
 }

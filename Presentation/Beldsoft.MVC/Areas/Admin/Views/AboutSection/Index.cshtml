@@ -1,0 +1,59 @@
+﻿@model List<Beldsoft.MVC.ViewModels.AboutSection.AboutSectionGetAllViewModel>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h4 class="card-title">About Sections</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body pt-0">
+        <div class="table-responsive">
+            <table class="table mb-0 datatable-table">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;"><button class="datatable-sorter">Main Title</button></th>
+                        <th style="width: 20%;"><button class="datatable-sorter">Sub Title</button></th>
+                        <th style="width: 15%;"><button class="datatable-sorter">Experience Number</button></th>
+                        <th style="width: 20%;"><button class="datatable-sorter">Experience Text</button></th>
+                        <th style="width: 15%;"><button class="datatable-sorter">Image</button></th>
+                        <th class="text-end" style="width: 10%;"><button class="datatable-sorter">Action</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var about in Model)
+                        {
+                            <tr>
+                                <td>@about.MainTitle</td>
+                                <td>@about.SubTitle</td>
+                                <td>@about.ExperienceNumber</td>
+                                <td>@about.ExperienceText</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(about.BigImageUrl))
+                                    {
+                                        <img src="@about.BigImageUrl" alt="@about.MainTitle" style="max-height:50px;" />
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    <a asp-action="Edit" asp-route-id="@about.Id" class="me-2">
+                                        <i class="las la-pen text-secondary fs-18"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No about sections found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

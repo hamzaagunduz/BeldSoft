@@ -1,0 +1,118 @@
+﻿@model AboutSectionUpdateViewModel
+
+<div class="card">
+    <div class="card-body pt-0">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="BigImageUrl" />
+            <input type="hidden" asp-for="SmallImageUrl" />
+
+            <!-- Genel Başlık -->
+            <div class="mb-3">
+                <label asp-for="SubTitle"></label>
+                <input asp-for="SubTitle" class="form-control" />
+                <span asp-validation-for="SubTitle" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MainTitle"></label>
+                <input asp-for="MainTitle" class="form-control" />
+                <span asp-validation-for="MainTitle" class="text-danger"></span>
+            </div>
+
+            <!-- Deneyim -->
+            <div class="mb-3">
+                <label asp-for="ExperienceNumber"></label>
+                <input asp-for="ExperienceNumber" class="form-control" />
+                <span asp-validation-for="ExperienceNumber" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ExperienceText"></label>
+                <input asp-for="ExperienceText" class="form-control" />
+                <span asp-validation-for="ExperienceText" class="text-danger"></span>
+            </div>
+
+            <!-- Mevcut Resimler -->
+            <div class="mb-3">
+                <p>Mevcut Büyük Resim:</p>
+                @if (!string.IsNullOrEmpty(Model.BigImageUrl))
+                {
+                    <img src="@Model.BigImageUrl" style="max-width:150px;" />
+                }
+                <input asp-for="BigImage" type="file" class="form-control mt-2" />
+                <span asp-validation-for="BigImage" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <p>Mevcut Küçük Resim:</p>
+                @if (!string.IsNullOrEmpty(Model.SmallImageUrl))
+                {
+                    <img src="@Model.SmallImageUrl" style="max-width:150px;" />
+                }
+                <input asp-for="SmallImage" type="file" class="form-control mt-2" />
+                <span asp-validation-for="SmallImage" class="text-danger"></span>
+            </div>
+
+            <!-- Tab 1 -->
+            <h5 class="mt-4">Tab 1 (Our History)</h5>
+            <div class="mb-3">
+                <label asp-for="Title1"></label>
+                <input asp-for="Title1" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Title1Description"></label>
+                <textarea asp-for="Title1Description" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Title1Step1"></label>
+                <input asp-for="Title1Step1" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Title1Step2"></label>
+                <input asp-for="Title1Step2" class="form-control" />
+            </div>
+
+            <!-- Tab 2 -->
+            <h5 class="mt-4">Tab 2 (School)</h5>
+            <div class="mb-3">
+                <label asp-for="Title2"></label>
+                <input asp-for="Title2" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Title2Description"></label>
+                <textarea asp-for="Title2Description" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Title2Step1"></label>
+                <input asp-for="Title2Step1" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Title2Step2"></label>
+                <input asp-for="Title2Step2" class="form-control" />
+            </div>
+
+            <!-- Tab 3 -->
+            <h5 class="mt-4">Tab 3 (Kids)</h5>
+            <div class="mb-3">
+                <label asp-for="Title3"></label>
+                <input asp-for="Title3" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Title3Description"></label>
+                <textarea asp-for="Title3Description" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Title3Step1"></label>
+                <input asp-for="Title3Step1" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Title3Step2"></label>
+                <input asp-for="Title3Step2" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+            <a asp-action="Index" asp-controller="Dashboard" asp-area="Admin" class="btn btn-secondary mt-3 ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
