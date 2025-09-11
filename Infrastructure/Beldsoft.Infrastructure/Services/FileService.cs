@@ -30,5 +30,19 @@ namespace Beldsoft.Infrastructure.Services
 
             return "/" + folderName + "/" + fileName;
         }
+
+        public Task DeleteFileAsync(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath))
+                return Task.CompletedTask;
+
+            // wwwroot ile tam path oluştur
+            var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", filePath.TrimStart('/'));
+
+            if (File.Exists(fullPath))
+                File.Delete(fullPath);
+
+            return Task.CompletedTask;
+        }
     }
 }

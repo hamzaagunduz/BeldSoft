@@ -1,0 +1,62 @@
+﻿@model List<HeroSectionGetAllViewModel>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h4 class="card-title">Hero Sections</h4>
+            </div><!--end col-->
+            <div class="col-auto">
+                <a href="/admin/herosection/create" class="btn bg-primary text-white">
+                    <i class="fas fa-plus me-1"></i> Yeni Hero Section
+                </a>
+            </div><!--end col-->
+
+           
+        </div><!--end row-->
+    </div><!--end card-header-->
+
+    <div class="card-body pt-0">
+        <div class="table-responsive">
+            <table class="table mb-0 datatable-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;"><button class="datatable-sorter">Sub Title</button></th>
+                        <th style="width: 25%;"><button class="datatable-sorter">Main Title</button></th>
+                        <th style="width: 25%;"><button class="datatable-sorter">Main Title Highlight</button></th>
+                        <th style="width: 25%;"><button class="datatable-sorter">Description</button></th>
+                        <th class="text-end" style="width: 15%;"><button class="datatable-sorter">Action</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var hero in Model)
+                        {
+                            <tr>
+                                <td>@hero.SubTitle</td>
+                                <td>@hero.MainTitle</td>
+                                <td>@hero.MainTitleHighlight</td>
+                                <td>@hero.Description</td>
+                                <td class="text-end">
+                                    <a asp-action="Edit" asp-route-id="@hero.Id" class="me-2">
+                                        <i class="las la-pen text-secondary fs-18"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@hero.Id">
+                                        <i class="las la-trash-alt text-secondary fs-18"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">No hero sections found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!--end table-responsive-->
+    </div><!--end card-body-->
+</div><!--end card-->

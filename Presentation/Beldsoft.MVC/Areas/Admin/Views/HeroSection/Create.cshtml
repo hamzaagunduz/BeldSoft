@@ -1,45 +1,71 @@
-﻿@model HeroSectionViewModel
+﻿@model HeroSectionCreateViewModel
 
-<h2>Create Hero Section</h2>
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="SubTitle" class="form-label"></label>
+                        <input asp-for="SubTitle" class="form-control" />
+                        <span asp-validation-for="SubTitle" class="text-danger"></span>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
 
-<form asp-action="Create" method="post" enctype="multipart/form-data">
-    <div class="form-group mb-3">
-        <label asp-for="SubTitle"></label>
-        <input asp-for="SubTitle" class="form-control" />
-        <span asp-validation-for="SubTitle" class="text-danger"></span>
-    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="MainTitle" class="form-label"></label>
+                        <input asp-for="MainTitle" class="form-control" />
+                        <span asp-validation-for="MainTitle" class="text-danger"></span>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
 
-    <div class="form-group mb-3">
-        <label asp-for="MainTitle"></label>
-        <input asp-for="MainTitle" class="form-control" />
-        <span asp-validation-for="MainTitle" class="text-danger"></span>
-    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="MainTitleHighlight" class="form-label"></label>
+                        <input asp-for="MainTitleHighlight" class="form-control" />
+                        <span asp-validation-for="MainTitleHighlight" class="text-danger"></span>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
 
-    <div class="form-group mb-3">
-        <label asp-for="MainTitleHighlight"></label>
-        <input asp-for="MainTitleHighlight" class="form-control" />
-        <span asp-validation-for="MainTitleHighlight" class="text-danger"></span>
-    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter Description"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
 
-    <div class="form-group mb-3">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="SmallImage" class="form-label">Small Image</label>
+                        <input asp-for="SmallImage" type="file" class="form-control" />
+                        <span asp-validation-for="SmallImage" class="text-danger"></span>
+                    </div>
+                </div><!--end col-->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="BigImage" class="form-label">Big Image</label>
+                        <input asp-for="BigImage" type="file" class="form-control" />
+                        <span asp-validation-for="BigImage" class="text-danger"></span>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
 
-    <div class="form-group mb-3">
-        <label asp-for="SmallImage">Small Image</label>
-        <input asp-for="SmallImage" type="file" class="form-control" />
-        <span asp-validation-for="SmallImage" class="text-danger"></span>
-    </div>
-
-    <div class="form-group mb-3">
-        <label asp-for="BigImage">Big Image</label>
-        <input asp-for="BigImage" type="file" class="form-control" />
-        <span asp-validation-for="BigImage" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
-</form>
-
+            <div class="row">
+                <div class="col-sm-12 text-start">
+                    <button type="submit" class="btn btn-primary px-4">Create</button>
+                    <a asp-action="Index" class="btn btn-secondary px-4 ms-2">Cancel</a>
+                </div>
+            </div><!--end row-->
+        </form>
+    </div><!--end card-body-->
+</div><!--end card-->

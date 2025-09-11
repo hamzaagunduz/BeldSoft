@@ -1,0 +1,49 @@
+﻿@model HeroSectionUpdateViewModel
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="SmallImageUrl" />
+    <input type="hidden" asp-for="BigImageUrl" />
+
+    <div class="mb-3">
+        <label asp-for="SubTitle"></label>
+        <input asp-for="SubTitle" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MainTitle"></label>
+        <input asp-for="MainTitle" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MainTitleHighlight"></label>
+        <input asp-for="MainTitleHighlight" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p>Mevcut Small Image:</p>
+            @if (!string.IsNullOrEmpty(Model.SmallImageUrl))
+            {
+                <img src="@Model.SmallImageUrl" style="max-width:150px;" />
+            }
+            <input asp-for="SmallImage" type="file" class="form-control mt-2" />
+        </div>
+        <div class="col-md-6">
+            <p>Mevcut Big Image:</p>
+            @if (!string.IsNullOrEmpty(Model.BigImageUrl))
+            {
+                <img src="@Model.BigImageUrl" style="max-width:150px;" />
+            }
+            <input asp-for="BigImage" type="file" class="form-control mt-2" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Update</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3 ms-2">Cancel</a>
+</form>

@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace Beldsoft.MVC.ViewModels.HeroSection
 {
-    public class HeroSectionViewModel
+    public class HeroSectionUpdateViewModel
     {
+        public int Id { get; set; }
+
         public string SubTitle { get; set; }
 
         public string MainTitle { get; set; }
@@ -12,10 +15,12 @@ namespace Beldsoft.MVC.ViewModels.HeroSection
 
         public string Description { get; set; }
 
-        [Display(Name = "Small Image")]
+        // Yeni upload için
         public IFormFile SmallImage { get; set; }
-
-        [Display(Name = "Big Image")]
         public IFormFile BigImage { get; set; }
+
+        // Mevcut dosya yolları (edit sayfasında önizleme için)
+        public string SmallImageUrl { get; set; }
+        public string BigImageUrl { get; set; }
     }
 }
