@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Beldsoft.Application.Interfaces.IBlogRepository;
 using Beldsoft.Application.Interfaces.IAppUserRepository;
 using Beldsoft.Persistence.Repositories;
+using Beldsoft.Application.Interfaces.IHeroSectionRepository;
 
 namespace Beldsoft.Persistence.ServiceRegister
 {
@@ -25,6 +26,7 @@ namespace Beldsoft.Persistence.ServiceRegister
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IAppUserRepository, AppUserRepository>();
+            services.AddScoped<IHeroSectionRepository, HeroSectionRepository>();
 
 
         }

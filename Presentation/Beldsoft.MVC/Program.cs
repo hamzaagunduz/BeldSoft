@@ -1,5 +1,7 @@
 using Bedldsoft.Domain.Entities;
+using Beldsoft.Application.Interfaces.IFileService;
 using Beldsoft.Application.ServiceRegister;
+using Beldsoft.Infrastructure.Services;
 using Beldsoft.Persistence.Context;
 using Beldsoft.Persistence.ServiceRegister;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +16,7 @@ builder.Services.AddControllersWithViews();
 // DbContext kaydý
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationService(builder.Configuration);
+builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 

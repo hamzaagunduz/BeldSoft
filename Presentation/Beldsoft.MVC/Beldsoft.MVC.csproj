@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Bedldsoft.Domain\Bedldsoft.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Beldsoft.Infrastructure\Beldsoft.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Beldsoft.Persistence\Beldsoft.Persistence.csproj" />
   </ItemGroup>
 
