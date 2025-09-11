@@ -16,6 +16,7 @@ namespace Beldsoft.Persistence.Context
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<HeroSection> HeroSections { get; set; }
+        public DbSet<ServiceSection> ServiceSections { get; set; }
 
     }
 }

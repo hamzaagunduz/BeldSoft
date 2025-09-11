@@ -7,7 +7,7 @@ using Beldsoft.Infrastructure.Repositories;
 
 namespace Beldsoft.Persistence.Repositories
 {
-    public class HeroSectionRepository : Repository<HeroSection>, IHeroSectionRepository
+    public class HeroSectionRepository : Repository<HeroSection>, IServiceSectionRepository
     {
         private readonly BeldsoftContext _context;
 

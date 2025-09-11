@@ -3,11 +3,13 @@ namespace Beldsoft.Application.Features.HeroSection.Results
     public class GetAllHeroSectionsResult
     {
         public int Id { get; set; }
-
-        public string SubTitle { get; set; }            // fun happens!
-        public string MainTitle { get; set; }           // The kids Centers
-        public string MainTitleHighlight { get; set; }  // Educatisson
-        public string Description { get; set; }         // work and play come together ?
+        public string SubTitle { get; set; }
+        public string MainTitle { get; set; }
+        public string MainTitleHighlight { get; set; }
+        public string Description { get; set; }
+        public string SmallImageUrl { get; set; }
+        public string BigImageUrl { get; set; }
 
     }
 }
+

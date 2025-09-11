@@ -26,7 +26,7 @@ namespace Beldsoft.Persistence.ServiceRegister
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IAppUserRepository, AppUserRepository>();
-            services.AddScoped<IHeroSectionRepository, HeroSectionRepository>();
+            services.AddScoped<IServiceSectionRepository, HeroSectionRepository>();
 
 
         }

@@ -11,9 +11,9 @@ namespace Beldsoft.Application.Features.HeroSection.Queries.GetAllHeroSections
 {
     public class GetAllHeroSectionsQueryHandler : IRequestHandler<GetAllHeroSectionsQuery, CommonResponse<List<GetAllHeroSectionsResult>>>
     {
-        private readonly IHeroSectionRepository _heroSectionRepository;
+        private readonly IServiceSectionRepository _heroSectionRepository;
 
-        public GetAllHeroSectionsQueryHandler(IHeroSectionRepository heroSectionRepository)
+        public GetAllHeroSectionsQueryHandler(IServiceSectionRepository heroSectionRepository)
         {
             _heroSectionRepository = heroSectionRepository;
         }
@@ -29,6 +29,8 @@ namespace Beldsoft.Application.Features.HeroSection.Queries.GetAllHeroSections
                 MainTitle = h.MainTitle,
                 MainTitleHighlight = h.MainTitleHighlight,
                 Description = h.Description,
+                BigImageUrl = h.BigImageUrl,
+                SmallImageUrl=h.SmallImageUrl
             }).ToList();
 
             return CommonResponse<List<GetAllHeroSectionsResult>>.Success(result);

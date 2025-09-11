@@ -10,6 +10,7 @@ using Beldsoft.MVC.ViewModels.HeroSection;
 using Beldsoft.MVC.ViewModels.AppUsers;
 using Beldsoft.Application.Features.HeroSection.Commands.UpdateHeroSection;
 using Beldsoft.Application.Features.HeroSection.Queries.GetHeroSectionById;
+using Beldsoft.Application.Features.HeroSection.Commands.DeleteHeroSection;
 
 namespace Beldsoft.MVC.Areas.Admin.Controllers
 {
@@ -131,6 +132,24 @@ namespace Beldsoft.MVC.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
+        [HttpPost("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteHeroSectionCommand(id));
+
+            if (!result.Succeeded)
+            {
+                // hata varsa Index'e dönüp mesaj gösterebilirsin
+                TempData["Error"] = string.Join(", ", result.Errors);
+                return RedirectToAction(nameof(Index));
+            }
+
+            TempData["Success"] = "Hero Section başarıyla silindi.";
+            return RedirectToAction(nameof(Index));
+        }
+
 
 
     }

@@ -35,6 +35,7 @@
     <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\simple-datatables\dts\editing\" />
     <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\simple-datatables\dts\export\" />
     <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\starability\starability-scss\starability\" />
+    <Folder Include="wwwroot\uploads\hero\" />
   </ItemGroup>
 
 </Project>

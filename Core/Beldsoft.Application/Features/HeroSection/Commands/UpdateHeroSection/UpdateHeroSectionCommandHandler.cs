@@ -8,9 +8,9 @@ namespace Beldsoft.Application.Features.HeroSection.Commands.UpdateHeroSection
 {
     public class UpdateHeroSectionCommandHandler : IRequestHandler<UpdateHeroSectionCommand, CommonResponse<int>>
     {
-        private readonly IHeroSectionRepository _heroSectionRepository;
+        private readonly IServiceSectionRepository _heroSectionRepository;
 
-        public UpdateHeroSectionCommandHandler(IHeroSectionRepository heroSectionRepository)
+        public UpdateHeroSectionCommandHandler(IServiceSectionRepository heroSectionRepository)
         {
             _heroSectionRepository = heroSectionRepository;
         }

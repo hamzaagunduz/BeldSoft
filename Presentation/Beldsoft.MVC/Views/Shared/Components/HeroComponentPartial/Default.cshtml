@@ -1,57 +1,40 @@
-﻿<section class="vs-hero overflow-hidden z-index-common parallax-wrap">
+﻿@model IEnumerable<Beldsoft.MVC.ViewModels.HeroSection.HeroSectionGetAllViewModel>
+
+
+<section class="vs-hero overflow-hidden z-index-common parallax-wrap">
     <div class="vs-hero__ele1">
         <img class="parallax-element" src="@Url.Content("~/toddly/assets/img/hero/h1-ele-1-1.svg")" alt="ele">
     </div>
     <div class="swiper vs-hero__active--zoom">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <div class="vs-hero__bg vs-hero__bg--zoom" data-bg-src='@Url.Content("~/toddly/assets/img/hero/banner-1-1.jpg")'></div>
-                <div class="container container--custom">
-                    <div class="vs-hero__content">
-                        <div class="vs-hero__shape">
-                            <div class="vs-hero__shape--bg vs-hero__anim" data-bg-src='@Url.Content("~/toddly/assets/img/hero/hero-shape-1.svg")'></div>
-                            <span class="vs-hero__title--sub vs-hero__anim">
-                                <img src="@Url.Content("~/toddly/assets/img/icons/hero-star-icon.svg")" alt="hero star icon">
-                                fun happens!
-                            </span>
-                            <h1 class="vs-hero__title--main vs-hero__anim">
-                                The kids Centerss <span>Educatisson</span>
-                            </h1>
-                            <p class="vs-hero__desc vs-hero__anim">
-                                work and play come together ?
-                            </p>
-                            <a href="contact.html" class="vs-btn vs-hero__btn vs-hero__anim">
-                                <span class="vs-btn__border"></span>know more
-                            </a>
-                            <img class="vs-hero__character vs-hero__anim" src="@Url.Content("~/toddly/assets/img/hero/hero-character-1.png")" alt="Hero Character">
+            @foreach (var hero in Model)
+            {
+                <div class="swiper-slide">
+                    <div class="vs-hero__bg vs-hero__bg--zoom" data-bg-src="@hero.BigImageUrl"></div>
+                    <div class="container container--custom">
+                        <div class="vs-hero__content">
+                            <div class="vs-hero__shape">
+                                <div class="vs-hero__shape--bg vs-hero__anim" data-bg-src='@Url.Content("~/toddly/assets/img/hero/hero-shape-1.svg")'></div>
+                                <span class="vs-hero__title--sub vs-hero__anim">
+                                    <img src="@Url.Content("~/toddly/assets/img/icons/hero-star-icon.svg")" alt="hero star icon">
+                                    @hero.SubTitle
+                                </span>
+                                <h1 class="vs-hero__title--main vs-hero__anim">
+                                    @hero.MainTitle <span>@hero.MainTitleHighlight</span>
+                                </h1>
+                                <p class="vs-hero__desc vs-hero__anim">
+                                    @hero.Description
+                                </p>
+                                <a href="/iletisim" class="vs-btn vs-hero__btn vs-hero__anim">
+                                    <span class="vs-btn__border"></span>İLETİŞİM İÇİN
+                                </a>
+
+                                <img class="vs-hero__character vs-hero__anim manimated" src=@hero.SmallImageUrl alt="Hero Character" style="animation-delay: 2.1s;">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="vs-hero__bg vs-hero__bg--zoom" data-bg-src='@Url.Content("~/toddly/assets/img/hero/banner-1-2.jpg")'></div>
-                <div class="container container--custom">
-                    <div class="vs-hero__content">
-                        <div class="vs-hero__shape">
-                            <div class="vs-hero__shape--bg vs-hero__anim" data-bg-src='@Url.Content("~/toddly/assets/img/hero/hero-shape-1.svg")'></div>
-                            <span class="vs-hero__title--sub vs-hero__anim">
-                                <img src="@Url.Content("~/toddly/assets/img/icons/hero-star-icon.svg")" alt="hero star icon">
-                                fun happens!
-                            </span>
-                            <h1 class="vs-hero__title--main vs-hero__anim">
-                                The kids Center <span>Education</span>
-                            </h1>
-                            <p class="vs-hero__desc vs-hero__anim">
-                                work and play come together ?
-                            </p>
-                            <a href="contact.html" class="vs-btn vs-hero__btn vs-hero__anim">
-                                <span class="vs-btn__border"></span>know more
-                            </a>
-                            <img class="vs-hero__character vs-hero__anim" src="@Url.Content("~/toddly/assets/img/hero/hero-character-1.png")" alt="Hero Character">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
         <div class="vs-hero__direction">
             <div class="vs-swiper-button-next">
