@@ -1,9 +1,6 @@
-using Beldsoft.Application.Responses;
-using MediatR;
-
-namespace Beldsoft.Application.Features.ServiceSection.Commands.UpdateServiceSection
+﻿namespace Beldsoft.MVC.ViewModels.ServiceSection
 {
-    public class UpdateServiceSectionCommand : IRequest<CommonResponse<int>>
+    public class ServiceSectionGetAllViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
