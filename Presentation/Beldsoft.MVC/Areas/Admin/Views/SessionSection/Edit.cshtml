@@ -1,0 +1,85 @@
+﻿@model SessionSectionUpdateViewModel
+
+<div class="card">
+    <div class="card-body pt-0">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Genel Başlıklar -->
+            <div class="mb-3">
+                <label asp-for="SubTitle"></label>
+                <input asp-for="SubTitle" class="form-control" />
+                <span asp-validation-for="SubTitle" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MainTitle"></label>
+                <input asp-for="MainTitle" class="form-control" />
+                <span asp-validation-for="MainTitle" class="text-danger"></span>
+            </div>
+
+            <!-- Session 1 -->
+            <h5 class="mt-4">Session 1</h5>
+            <div class="mb-3">
+                <label asp-for="Title1"></label>
+                <input asp-for="Title1" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Time1"></label>
+                <input asp-for="Time1" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="IconUrl1"></label>
+                <input asp-for="IconUrl1" class="form-control" />
+            </div>
+
+            <!-- Session 2 -->
+            <h5 class="mt-4">Session 2</h5>
+            <div class="mb-3">
+                <label asp-for="Title2"></label>
+                <input asp-for="Title2" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Time2"></label>
+                <input asp-for="Time2" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="IconUrl2"></label>
+                <input asp-for="IconUrl2" class="form-control" />
+            </div>
+
+            <!-- Session 3 -->
+            <h5 class="mt-4">Session 3</h5>
+            <div class="mb-3">
+                <label asp-for="Title3"></label>
+                <input asp-for="Title3" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Time3"></label>
+                <input asp-for="Time3" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="IconUrl3"></label>
+                <input asp-for="IconUrl3" class="form-control" />
+            </div>
+
+            <!-- Session 4 -->
+            <h5 class="mt-4">Session 4</h5>
+            <div class="mb-3">
+                <label asp-for="Title4"></label>
+                <input asp-for="Title4" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Time4"></label>
+                <input asp-for="Time4" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="IconUrl4"></label>
+                <input asp-for="IconUrl4" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+            <a asp-action="Index" asp-controller="Dashboard" asp-area="Admin" class="btn btn-secondary mt-3 ms-2">Cancel</a>
+        </form>
+    </div>
+</div>

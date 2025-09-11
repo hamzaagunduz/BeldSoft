@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using System.Threading.Tasks;
-using Beldsoft.Application.Features.ServiceSection.Queries.GetAllServiceSections;
-using Beldsoft.MVC.ViewModels.ServiceSection;
+using Beldsoft.Application.Features.SessionSection.Queries.GetAllSessionSections;
+using Beldsoft.MVC.ViewModels.SessionSection;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Beldsoft.MVC.ViewComponents.HomeComponents
 {
@@ -20,10 +19,16 @@ namespace Beldsoft.MVC.ViewComponents.HomeComponents
             _mapper = mapper;
         }
 
-        public IViewComponentResult InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
-        }
+            var result = await _mediator.Send(new GetAllSessionSectionsQuery());
 
+            if (!result.Succeeded || result.Data == null)
+                return View(Enumerable.Empty<SessionSectionGetAllViewModel>());
+
+            var model = _mapper.Map<SessionSectionGetAllViewModel>(result.Data.First());
+
+            return View(model);
+        }
     }
 }

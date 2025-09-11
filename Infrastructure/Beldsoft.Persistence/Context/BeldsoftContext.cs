@@ -11,13 +11,13 @@ namespace Beldsoft.Persistence.Context
         {
         }
 
-        // Domain tabloları
         public DbSet<AppUser> AppUsers { get; set; }      
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<HeroSection> HeroSections { get; set; }
         public DbSet<ServiceSection> ServiceSections { get; set; }
         public DbSet<AboutSection> AboutSections { get; set; }
+        public DbSet<SessionSection> SessionSections { get; set; }
 
     }
 }

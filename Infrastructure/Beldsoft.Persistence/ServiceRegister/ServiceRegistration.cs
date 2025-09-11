@@ -11,6 +11,7 @@ using Beldsoft.Persistence.Repositories;
 using Beldsoft.Application.Interfaces.IHeroSectionRepository;
 using Beldsoft.Application.Interfaces.IServiceSectionRepository;
 using Beldsoft.Application.Interfaces.IAboutSectionRepository;
+using Beldsoft.Application.Interfaces.ISessionSectionRepository;
 
 namespace Beldsoft.Persistence.ServiceRegister
 {
@@ -31,6 +32,7 @@ namespace Beldsoft.Persistence.ServiceRegister
             services.AddScoped<IHeroSectionRepository, HeroSectionRepository>();
             services.AddScoped<IServiceSectionRepository, ServiceSectionRepository>();
             services.AddScoped<IAboutSectionRepository, AboutSectionRepository>();
+            services.AddScoped<ISessionSectionRepository, SessionSectionRepository>();
 
 
         }

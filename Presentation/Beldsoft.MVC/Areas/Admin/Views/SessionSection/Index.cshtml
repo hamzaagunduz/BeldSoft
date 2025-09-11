@@ -1,10 +1,10 @@
-﻿@model List<AboutSectionGetAllViewModel>
+﻿@model List<SessionSectionGetAllViewModel>
 
 <div class="card">
     <div class="card-header">
         <div class="row align-items-center">
             <div class="col">
-                <h4 class="card-title">About Sections</h4>
+                <h4 class="card-title">Session Sections</h4>
             </div>
         </div>
     </div>
@@ -16,30 +16,28 @@
                     <tr>
                         <th style="width: 20%;"><button class="datatable-sorter">Main Title</button></th>
                         <th style="width: 20%;"><button class="datatable-sorter">Sub Title</button></th>
-                        <th style="width: 15%;"><button class="datatable-sorter">Experience Number</button></th>
-                        <th style="width: 20%;"><button class="datatable-sorter">Experience Text</button></th>
-                        <th style="width: 15%;"><button class="datatable-sorter">Image</button></th>
-                        <th class="text-end" style="width: 10%;"><button class="datatable-sorter">Action</button></th>
+                        <th style="width: 40%;"><button class="datatable-sorter">Sessions</button></th>
+                        <th class="text-end" style="width: 20%;"><button class="datatable-sorter">Action</button></th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
-                        foreach (var about in Model)
+                        foreach (var session in Model)
                         {
                             <tr>
-                                <td>@about.MainTitle</td>
-                                <td>@about.SubTitle</td>
-                                <td>@about.ExperienceNumber</td>
-                                <td>@about.ExperienceText</td>
+                                <td>@session.MainTitle</td>
+                                <td>@session.SubTitle</td>
                                 <td>
-                                    @if (!string.IsNullOrEmpty(about.BigImageUrl))
-                                    {
-                                        <img src="@about.BigImageUrl" alt="@about.MainTitle" style="max-height:50px;" />
-                                    }
+                                    <ul class="list-unstyled mb-0">
+                                        <li><b>@session.Title1</b> - @session.Time1 <i>@session.IconUrl1</i></li>
+                                        <li><b>@session.Title2</b> - @session.Time2 <i>@session.IconUrl2</i></li>
+                                        <li><b>@session.Title3</b> - @session.Time3 <i>@session.IconUrl3</i></li>
+                                        <li><b>@session.Title4</b> - @session.Time4 <i>@session.IconUrl4</i></li>
+                                    </ul>
                                 </td>
                                 <td class="text-end">
-                                    <a asp-action="Edit" asp-route-id="@about.Id" class="me-2">
+                                    <a asp-action="Edit" asp-route-id="@session.Id" class="me-2">
                                         <i class="las la-pen text-secondary fs-18"></i>
                                     </a>
                                 </td>
@@ -49,7 +47,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="6" class="text-center text-muted">No about sections found.</td>
+                            <td colspan="4" class="text-center text-muted">No session sections found.</td>
                         </tr>
                     }
                 </tbody>
