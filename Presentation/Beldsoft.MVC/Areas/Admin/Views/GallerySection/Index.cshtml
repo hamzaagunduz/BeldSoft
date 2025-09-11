@@ -1,0 +1,81 @@
+﻿@model List<GallerySectionGetAllViewModel>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h4 class="card-title">Gallery Sections</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body pt-0">
+        <div class="table-responsive">
+            <table class="table mb-0 datatable-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;"><button class="datatable-sorter">Main Title</button></th>
+                        <th style="width: 15%;"><button class="datatable-sorter">Sub Title</button></th>
+                        <th style="width: 20%;"><button class="datatable-sorter">Images</button></th>
+                        <th style="width: 20%;"><button class="datatable-sorter">Categories</button></th>
+                        <th style="width: 20%;"><button class="datatable-sorter">Headings</button></th>
+                        <th class="text-end" style="width: 10%;"><button class="datatable-sorter">Action</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var gallery in Model)
+                        {
+                            <tr>
+                                <td>@gallery.MainTitle</td>
+                                <td>@gallery.SubTitle</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(gallery.ImageUrl1))
+                                    {
+                                        <img src="@gallery.ImageUrl1" alt="@gallery.MainTitle" style="max-height:50px; margin-right:5px;" />
+                                    }
+                                    @if (!string.IsNullOrEmpty(gallery.ImageUrl2))
+                                    {
+                                        <img src="@gallery.ImageUrl2" alt="@gallery.MainTitle" style="max-height:50px; margin-right:5px;" />
+                                    }
+                                    @if (!string.IsNullOrEmpty(gallery.ImageUrl3))
+                                    {
+                                        <img src="@gallery.ImageUrl3" alt="@gallery.MainTitle" style="max-height:50px; margin-right:5px;" />
+                                    }
+                                    @if (!string.IsNullOrEmpty(gallery.ImageUrl4))
+                                    {
+                                        <img src="@gallery.ImageUrl4" alt="@gallery.MainTitle" style="max-height:50px;" />
+                                    }
+                                </td>
+                                <td>
+                                    @gallery.Category1 <br />
+                                    @gallery.Category2 <br />
+                                    @gallery.Category3 <br />
+                                    @gallery.Category4
+                                </td>
+                                <td>
+                                    @gallery.Heading1 <br />
+                                    @gallery.Heading2 <br />
+                                    @gallery.Heading3 <br />
+                                    @gallery.Heading4
+                                </td>
+                                <td class="text-end">
+                                    <a asp-action="Edit" asp-route-id="@gallery.Id" class="me-2">
+                                        <i class="las la-pen text-secondary fs-18"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No gallery sections found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

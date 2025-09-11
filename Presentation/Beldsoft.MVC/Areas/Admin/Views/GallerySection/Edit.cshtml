@@ -1,0 +1,102 @@
+﻿@model GallerySectionUpdateViewModel
+
+<div class="card">
+    <div class="card-body pt-0">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImageUrl1" />
+            <input type="hidden" asp-for="ImageUrl2" />
+            <input type="hidden" asp-for="ImageUrl3" />
+            <input type="hidden" asp-for="ImageUrl4" />
+
+            <!-- Genel Başlık -->
+            <div class="mb-3">
+                <label asp-for="SubTitle"></label>
+                <input asp-for="SubTitle" class="form-control" />
+                <span asp-validation-for="SubTitle" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MainTitle"></label>
+                <input asp-for="MainTitle" class="form-control" />
+                <span asp-validation-for="MainTitle" class="text-danger"></span>
+            </div>
+
+            <!-- Mevcut ve Yeni Görseller -->
+            <div class="mb-3">
+                <p>Mevcut Resim 1:</p>
+                @if (!string.IsNullOrEmpty(Model.ImageUrl1))
+                {
+                    <img src="@Model.ImageUrl1" style="max-width:150px;" />
+                }
+                <input asp-for="Image1" type="file" class="form-control mt-2" />
+            </div>
+
+            <div class="mb-3">
+                <p>Mevcut Resim 2:</p>
+                @if (!string.IsNullOrEmpty(Model.ImageUrl2))
+                {
+                    <img src="@Model.ImageUrl2" style="max-width:150px;" />
+                }
+                <input asp-for="Image2" type="file" class="form-control mt-2" />
+            </div>
+
+            <div class="mb-3">
+                <p>Mevcut Resim 3:</p>
+                @if (!string.IsNullOrEmpty(Model.ImageUrl3))
+                {
+                    <img src="@Model.ImageUrl3" style="max-width:150px;" />
+                }
+                <input asp-for="Image3" type="file" class="form-control mt-2" />
+            </div>
+
+            <div class="mb-3">
+                <p>Mevcut Resim 4:</p>
+                @if (!string.IsNullOrEmpty(Model.ImageUrl4))
+                {
+                    <img src="@Model.ImageUrl4" style="max-width:150px;" />
+                }
+                <input asp-for="Image4" type="file" class="form-control mt-2" />
+            </div>
+
+            <!-- Kategoriler -->
+            <div class="mb-3">
+                <label asp-for="Category1"></label>
+                <input asp-for="Category1" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Category2"></label>
+                <input asp-for="Category2" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Category3"></label>
+                <input asp-for="Category3" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Category4"></label>
+                <input asp-for="Category4" class="form-control" />
+            </div>
+
+            <!-- Headings -->
+            <div class="mb-3">
+                <label asp-for="Heading1"></label>
+                <input asp-for="Heading1" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Heading2"></label>
+                <input asp-for="Heading2" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Heading3"></label>
+                <input asp-for="Heading3" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Heading4"></label>
+                <input asp-for="Heading4" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+            <a asp-action="Index" asp-controller="GallerySection" asp-area="Admin" class="btn btn-secondary mt-3 ms-2">Cancel</a>
+        </form>
+    </div>
+</div>

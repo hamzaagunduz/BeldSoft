@@ -1,4 +1,5 @@
 ﻿using Bedldsoft.Domain.Entities;
+using Beldsoft.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ namespace Beldsoft.Persistence.Context
         public DbSet<ServiceSection> ServiceSections { get; set; }
         public DbSet<AboutSection> AboutSections { get; set; }
         public DbSet<SessionSection> SessionSections { get; set; }
+        public DbSet<GallerySection> GallerySections { get; set; }
 
     }
 }

@@ -1,0 +1,87 @@
+﻿@model GallerySectionGetAllViewModel
+
+<section class="vs-gallery--area space space-extra-bottom overflow-hidden">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="vs-title text-center title-anime animation-style2">
+                    <div class="title-anime__wrap">
+                        <span class="vs-title__sub">@Model.SubTitle</span>
+                        <h2 class="vs-title__main">@Model.MainTitle</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vs-gallery--row">
+
+            <div class="vs-gallery vs-gallery--col1 wow animate__fadeInUp" data-wow-delay="0.25s">
+                <div class="vs-gallery__figure">
+                    <a class="vs-gallery__image--link" href="class-details.html">
+                        <img class="vs-gallery__image" src="@Model.ImageUrl1" alt="@Model.Heading1" loading="lazy">
+                    </a>
+                </div>
+                <div class="vs-gallery__hover">
+                    <a href="@Model.ImageUrl1" class="vs-gallery__icon popup-image">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a href="class-details.html" class="vs-gallery__cate">@Model.Category1</a>
+                    <a class="vs-gallery__heading--link" href="class-details.html">
+                        <h4 class="vs-gallery__heading">@Model.Heading1</h4>
+                    </a>
+                </div>
+            </div>
+
+            <div class="vs-gallery vs-gallery--col2 wow animate__fadeInUp" data-wow-delay="0.35s">
+                <div class="vs-gallery__figure">
+                    <a class="vs-gallery__image--link" href="class-details.html">
+                        <img class="vs-gallery__image" src="@Model.ImageUrl2" alt="@Model.Heading2" loading="lazy">
+                    </a>
+                </div>
+                <div class="vs-gallery__hover">
+                    <a href="@Model.ImageUrl2" class="vs-gallery__icon popup-image">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a href="class-details.html" class="vs-gallery__cate">@Model.Category2</a>
+                    <a class="vs-gallery__heading--link" href="class-details.html">
+                        <h4 class="vs-gallery__heading">@Model.Heading2</h4>
+                    </a>
+                </div>
+            </div>
+
+            <div class="vs-gallery vs-gallery--col3 wow animate__fadeInUp" data-wow-delay="0.45s">
+                <div class="vs-gallery__figure">
+                    <a class="vs-gallery__image--link" href="class-details.html">
+                        <img class="vs-gallery__image" src="@Model.ImageUrl3" alt="@Model.Heading3" loading="lazy">
+                    </a>
+                </div>
+                <div class="vs-gallery__hover">
+                    <a href="@Model.ImageUrl3" class="vs-gallery__icon popup-image">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a href="class-details.html" class="vs-gallery__cate">@Model.Category3</a>
+                    <a class="vs-gallery__heading--link" href="class-details.html">
+                        <h4 class="vs-gallery__heading">@Model.Heading3</h4>
+                    </a>
+                </div>
+            </div>
+
+            <div class="vs-gallery vs-gallery--col4 wow animate__fadeInUp" data-wow-delay="0.55s">
+                <div class="vs-gallery__figure">
+                    <a class="vs-gallery__image--link" href="class-details.html">
+                        <img class="vs-gallery__image" src="@Model.ImageUrl4" alt="@Model.Heading4" loading="lazy">
+                    </a>
+                </div>
+                <div class="vs-gallery__hover">
+                    <a href="@Model.ImageUrl4" class="vs-gallery__icon popup-image">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a href="class-details.html" class="vs-gallery__cate">@Model.Category4</a>
+                    <a class="vs-gallery__heading--link" href="class-details.html">
+                        <h4 class="vs-gallery__heading">@Model.Heading4</h4>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
