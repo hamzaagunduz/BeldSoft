@@ -11,9 +11,9 @@ namespace Beldsoft.Application.Features.HeroSection.Queries.GetAllHeroSections
 {
     public class GetAllHeroSectionsQueryHandler : IRequestHandler<GetAllHeroSectionsQuery, CommonResponse<List<GetAllHeroSectionsResult>>>
     {
-        private readonly IServiceSectionRepository _heroSectionRepository;
+        private readonly IHeroSectionRepository _heroSectionRepository;
 
-        public GetAllHeroSectionsQueryHandler(IServiceSectionRepository heroSectionRepository)
+        public GetAllHeroSectionsQueryHandler(IHeroSectionRepository heroSectionRepository)
         {
             _heroSectionRepository = heroSectionRepository;
         }

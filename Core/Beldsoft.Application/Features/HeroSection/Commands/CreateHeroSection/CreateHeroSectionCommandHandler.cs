@@ -10,9 +10,9 @@ namespace Beldsoft.Application.Features.HeroSection.Commands.CreateHeroSection
 {
     public class CreateHeroSectionCommandHandler : IRequestHandler<CreateHeroSectionCommand, CommonResponse<int>>
     {
-        private readonly IServiceSectionRepository _heroSectionRepository;
+        private readonly IHeroSectionRepository _heroSectionRepository;
 
-        public CreateHeroSectionCommandHandler(IServiceSectionRepository heroSectionRepository)
+        public CreateHeroSectionCommandHandler(IHeroSectionRepository heroSectionRepository)
         {
             _heroSectionRepository = heroSectionRepository;
         }

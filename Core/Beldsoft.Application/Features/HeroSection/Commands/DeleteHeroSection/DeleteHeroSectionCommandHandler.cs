@@ -8,9 +8,9 @@ namespace Beldsoft.Application.Features.HeroSection.Commands.DeleteHeroSection
 {
     public class DeleteHeroSectionCommandHandler : IRequestHandler<DeleteHeroSectionCommand, CommonResponse<int>>
     {
-        private readonly IServiceSectionRepository _heroSectionRepository;
+        private readonly IHeroSectionRepository _heroSectionRepository;
 
-        public DeleteHeroSectionCommandHandler(IServiceSectionRepository heroSectionRepository)
+        public DeleteHeroSectionCommandHandler(IHeroSectionRepository heroSectionRepository)
         {
             _heroSectionRepository = heroSectionRepository;
         }

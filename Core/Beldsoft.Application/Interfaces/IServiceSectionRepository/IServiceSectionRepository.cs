@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Beldsoft.Application.Interfaces.IServiceSectionRepository
 {
-    public interface IServiceSectionRepository:IRepository<HeroSection>
+    public interface IServiceSectionRepository:IRepository<ServiceSection>
     {
     }
 }
