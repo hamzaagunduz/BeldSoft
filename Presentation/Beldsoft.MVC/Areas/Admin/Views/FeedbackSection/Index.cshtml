@@ -1,0 +1,69 @@
+﻿@model List<Beldsoft.MVC.ViewModels.FeedbackSection.FeedbackSectionGetAllViewModel>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h4 class="card-title">Feedback Sections</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body pt-0">
+        <div class="table-responsive">
+            <table class="table mb-0 datatable-table">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Big Image</th>
+                        <th style="width: 20%;">Users</th>
+                        <th style="width: 25%;">Comments</th>
+                        <th style="width: 15%;">Ratings</th>
+                        <th class="text-end" style="width: 20%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var feedback in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(feedback.BigImageUrl))
+                                    {
+                                        <img src="@feedback.BigImageUrl" style="max-height:50px;" />
+                                    }
+                                </td>
+                                <td>
+                                    @feedback.UserName1 (@feedback.UserPosition1) <br />
+                                    @feedback.UserName2 (@feedback.UserPosition2) <br />
+                                    @feedback.UserName3 (@feedback.UserPosition3)
+                                </td>
+                                <td>
+                                    @feedback.Comment1 <br />
+                                    @feedback.Comment2 <br />
+                                    @feedback.Comment3
+                                </td>
+                                <td>
+                                    @feedback.Rating1 <br />
+                                    @feedback.Rating2 <br />
+                                    @feedback.Rating3
+                                </td>
+                                <td class="text-end">
+                                    <a asp-action="Edit" asp-route-id="@feedback.Id" class="me-2">
+                                        <i class="las la-pen text-secondary fs-18"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">No feedback sections found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

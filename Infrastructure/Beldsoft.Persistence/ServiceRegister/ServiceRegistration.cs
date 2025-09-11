@@ -4,7 +4,6 @@ using Beldsoft.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Identity;
 using Beldsoft.Application.Interfaces.IBlogRepository;
 using Beldsoft.Application.Interfaces.IAppUserRepository;
 using Beldsoft.Persistence.Repositories;
@@ -13,6 +12,7 @@ using Beldsoft.Application.Interfaces.IServiceSectionRepository;
 using Beldsoft.Application.Interfaces.IAboutSectionRepository;
 using Beldsoft.Application.Interfaces.ISessionSectionRepository;
 using Beldsoft.Application.Interfaces.IGallerySectionRepository;
+using Beldsoft.Application.Interfaces.IFeedbackSectionRepository;
 
 namespace Beldsoft.Persistence.ServiceRegister
 {
@@ -35,6 +35,7 @@ namespace Beldsoft.Persistence.ServiceRegister
             services.AddScoped<IAboutSectionRepository, AboutSectionRepository>();
             services.AddScoped<ISessionSectionRepository, SessionSectionRepository>();
             services.AddScoped<IGallerySectionRepository, GallerySectionRepository>();
+            services.AddScoped<IFeedbackSectionRepository, FeedbackSectionRepository>();
 
 
         }

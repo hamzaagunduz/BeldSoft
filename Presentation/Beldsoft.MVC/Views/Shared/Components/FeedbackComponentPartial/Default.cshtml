@@ -1,0 +1,105 @@
+﻿@model Beldsoft.MVC.ViewModels.FeedbackSection.FeedbackSectionGetAllViewModel
+
+<section class="bg-title z-index-common space overflow-hidden">
+    <img src="~/toddly/assets/img/elements/sec-divider-ele1.svg" alt="sec-divider-ele1" class="sec-ele1 position-absolute start-0 end-0 bottom-0 z-index-n2">
+
+    <!-- Arka plan resmi -->
+    <div class="feedback-image" data-bg-src="@Url.Content(Model.BigImageUrl)"></div>
+
+    <img class="feedback--ele1 wow animate__fadeInRight" data-wow-delay="0.35s"
+         src="~/toddly/assets/img/feedback/vs-feedback-ele-1.png" alt="elements">
+
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-lg-7">
+                <div class="feedback-wrapper">
+                    <div class="vs-title vs-title--style2 title-anime animation-style2 text-center text-lg-start">
+                        <div class="title-anime__wrap">
+                            <span class="vs-title__sub">Müşteri Yorumları</span>
+                            <h2 class="vs-title__main pe-xl-3">
+                                Okulumuz <span>Hakkında</span> Geri Bildirimler
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="swiper feedback-slider">
+                        <div class="swiper-wrapper">
+
+                            <!-- 1. Kullanıcı -->
+                            <div class="swiper-slide">
+                                <div class="feedback-block">
+                                    <div class="feedback-block__image">
+                                        <img src="@Url.Content(Model.UserImageUrl1)" alt="feedback user 1" width="145" height="145">
+                                        <div class="feedback-block__icon--quote">
+                                            <img src="~/toddly/assets/img/icons/svg-quote-icon.svg" alt="quote">
+                                        </div>
+                                    </div>
+                                    <div class="feedback-block__content">
+                                        <h4 class="feedback-block__title">@Model.UserName1</h4>
+                                        <span class="feedback-block__title--sub">@Model.UserPosition1</span>
+                                        <div class="feedback-block__rating">
+                                            @for (int i = 0; i < (Model.Rating1 ?? 0); i++)
+                                            {
+                                                <i class="fa-solid fa-star"></i>
+                                            }
+                                        </div>
+                                        <p class="feedback-block__desc">“@Model.Comment1”</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 2. Kullanıcı -->
+                            <div class="swiper-slide">
+                                <div class="feedback-block">
+                                    <div class="feedback-block__image">
+                                        <img src="@Url.Content(Model.UserImageUrl2)" alt="feedback user 2" width="145" height="145">
+                                        <div class="feedback-block__icon--quote">
+                                            <img src="~/toddly/assets/img/icons/svg-quote-icon.svg" alt="quote">
+                                        </div>
+                                    </div>
+                                    <div class="feedback-block__content">
+                                        <h4 class="feedback-block__title">@Model.UserName2</h4>
+                                        <span class="feedback-block__title--sub">@Model.UserPosition2</span>
+                                        <div class="feedback-block__rating">
+                                            @for (int i = 0; i < (Model.Rating2 ?? 0); i++)
+                                            {
+                                                <i class="fa-solid fa-star"></i>
+                                            }
+                                        </div>
+                                        <p class="feedback-block__desc">“@Model.Comment2”</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. Kullanıcı -->
+                            <div class="swiper-slide">
+                                <div class="feedback-block">
+                                    <div class="feedback-block__image">
+                                        <img src="@Url.Content(Model.UserImageUrl3)" alt="feedback user 3" width="145" height="145">
+                                        <div class="feedback-block__icon--quote">
+                                            <img src="~/toddly/assets/img/icons/svg-quote-icon.svg" alt="quote">
+                                        </div>
+                                    </div>
+                                    <div class="feedback-block__content">
+                                        <h4 class="feedback-block__title">@Model.UserName3</h4>
+                                        <span class="feedback-block__title--sub">@Model.UserPosition3</span>
+                                        <div class="feedback-block__rating">
+                                            @for (int i = 0; i < (Model.Rating3 ?? 0); i++)
+                                            {
+                                                <i class="fa-solid fa-star"></i>
+                                            }
+                                        </div>
+                                        <p class="feedback-block__desc">“@Model.Comment3”</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="vs-feedback-pagination"></div>
+                    </div>
+                </div>
+                <!-- End Feedback Wrapper -->
+            </div>
+        </div>
+    </div>
+</section>

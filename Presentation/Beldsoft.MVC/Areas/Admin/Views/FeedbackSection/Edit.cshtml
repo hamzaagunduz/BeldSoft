@@ -1,0 +1,110 @@
+﻿@model Beldsoft.MVC.ViewModels.FeedbackSection.FeedbackSectionUpdateViewModel
+
+<div class="card">
+    <div class="card-body pt-0">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="BigImageUrl" />
+            <input type="hidden" asp-for="UserImageUrl1" />
+            <input type="hidden" asp-for="UserImageUrl2" />
+            <input type="hidden" asp-for="UserImageUrl3" />
+
+            <!-- Büyük Slider Görseli -->
+            <div class="mb-3">
+                <label>Current Big Image:</label>
+                @if (!string.IsNullOrEmpty(Model.BigImageUrl))
+                {
+                    <img src="@Model.BigImageUrl" style="max-width:150px;" />
+                }
+                <input asp-for="BigImage" type="file" class="form-control mt-2" />
+            </div>
+
+            <!-- Kullanıcı Resimleri -->
+            <div class="mb-3">
+                <p>User Image 1:</p>
+                @if (!string.IsNullOrEmpty(Model.UserImageUrl1))
+                {
+                    <img src="@Model.UserImageUrl1" style="max-width:150px;" />
+                }
+                <input asp-for="UserImage1" type="file" class="form-control mt-2" />
+            </div>
+
+            <div class="mb-3">
+                <p>User Image 2:</p>
+                @if (!string.IsNullOrEmpty(Model.UserImageUrl2))
+                {
+                    <img src="@Model.UserImageUrl2" style="max-width:150px;" />
+                }
+                <input asp-for="UserImage2" type="file" class="form-control mt-2" />
+            </div>
+
+            <div class="mb-3">
+                <p>User Image 3:</p>
+                @if (!string.IsNullOrEmpty(Model.UserImageUrl3))
+                {
+                    <img src="@Model.UserImageUrl3" style="max-width:150px;" />
+                }
+                <input asp-for="UserImage3" type="file" class="form-control mt-2" />
+            </div>
+
+            <!-- Kullanıcı Bilgileri -->
+            <div class="mb-3">
+                <label asp-for="UserName1">User 1 Name</label>
+                <input asp-for="UserName1" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="UserPosition1">User 1 Position</label>
+                <input asp-for="UserPosition1" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UserName2">User 2 Name</label>
+                <input asp-for="UserName2" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="UserPosition2">User 2 Position</label>
+                <input asp-for="UserPosition2" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UserName3">User 3 Name</label>
+                <input asp-for="UserName3" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="UserPosition3">User 3 Position</label>
+                <input asp-for="UserPosition3" class="form-control" />
+            </div>
+
+            <!-- Yorumlar -->
+            <div class="mb-3">
+                <label asp-for="Comment1">Comment 1</label>
+                <textarea asp-for="Comment1" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Comment2">Comment 2</label>
+                <textarea asp-for="Comment2" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Comment3">Comment 3</label>
+                <textarea asp-for="Comment3" class="form-control"></textarea>
+            </div>
+
+            <!-- Ratingler -->
+            <div class="mb-3">
+                <label asp-for="Rating1">Rating 1</label>
+                <input asp-for="Rating1" type="number" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Rating2">Rating 2</label>
+                <input asp-for="Rating2" type="number" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Rating3">Rating 3</label>
+                <input asp-for="Rating3" type="number" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+            <a asp-action="Index" asp-controller="FeedbackSection" asp-area="Admin" class="btn btn-secondary mt-3 ms-2">Cancel</a>
+        </form>
+    </div>
+</div>

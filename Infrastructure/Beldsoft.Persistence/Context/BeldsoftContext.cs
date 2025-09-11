@@ -20,6 +20,7 @@ namespace Beldsoft.Persistence.Context
         public DbSet<AboutSection> AboutSections { get; set; }
         public DbSet<SessionSection> SessionSections { get; set; }
         public DbSet<GallerySection> GallerySections { get; set; }
+        public DbSet<FeedbackSection> FeedbackSections { get; set; }
 
     }
 }
