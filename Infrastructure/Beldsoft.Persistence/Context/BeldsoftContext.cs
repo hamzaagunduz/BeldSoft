@@ -22,6 +22,7 @@ namespace Beldsoft.Persistence.Context
         public DbSet<GallerySection> GallerySections { get; set; }
         public DbSet<FeedbackSection> FeedbackSections { get; set; }
         public DbSet<SiteSettings> SiteSettings { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
 
     }
 }
