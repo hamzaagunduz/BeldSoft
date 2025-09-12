@@ -2,7 +2,7 @@
 
 namespace Beldsoft.MVC.ViewModels.Contact
 {
-    public class ContactPageViewModel
+    public class ContactSpaceViewModel
     {
         public SiteSettingsGetAllViewModel SiteSettings { get; set; }
         public ContactMessageCreateViewModel ContactMessage { get; set; }

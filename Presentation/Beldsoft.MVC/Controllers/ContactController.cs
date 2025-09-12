@@ -25,10 +25,10 @@ namespace Beldsoft.MVC.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(ContactMessageCreateViewModel model)
+        public async Task<IActionResult> Create(ContactSpaceViewModel model)
         {
-
-            var command = _mapper.Map<CreateContactMessageCommand>(model);
+            // ContactMessage property’si üzerinden al
+            var command = _mapper.Map<CreateContactMessageCommand>(model.ContactMessage);
 
             var result = await _mediator.Send(command);
 
@@ -37,11 +37,14 @@ namespace Beldsoft.MVC.Controllers
                 foreach (var error in result.Errors)
                     ModelState.AddModelError(string.Empty, error);
 
+                // SiteSettings eksik olmaması için yeniden doldur
+                // Örn: var siteSettings = await _mediator.Send(new GetAllSiteSettingsQuery());
                 return View(model);
             }
 
             TempData["SuccessMessage"] = "Mesajınız başarıyla gönderildi!";
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

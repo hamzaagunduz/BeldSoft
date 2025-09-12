@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Beldsoft.Application.Features.SiteSettings.Queries.GetAllSiteSettings;
+using Beldsoft.MVC.ViewModels.Contact;
 using Beldsoft.MVC.ViewModels.SiteSettings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -23,13 +24,15 @@ namespace Beldsoft.MVC.ViewComponents.ContactComponents
         {
             var result = await _mediator.Send(new GetAllSiteSettingsQuery());
 
-            if (!result.Succeeded || result.Data == null || !result.Data.Any())
-                return View(null);
+            var model = new ContactSpaceViewModel();
 
-            // Tek satır veri al
-            var settings = result.Data.First();
-            var model = _mapper.Map<SiteSettingsGetAllViewModel>(settings);
+            if (result.Succeeded && result.Data != null && result.Data.Any())
+            {
+                var settings = result.Data.First();
+                model.SiteSettings = _mapper.Map<SiteSettingsGetAllViewModel>(settings);
+            }
 
+            // ContactForm zaten varsayılan olarak oluşturuluyor
             return View(model);
         }
     }

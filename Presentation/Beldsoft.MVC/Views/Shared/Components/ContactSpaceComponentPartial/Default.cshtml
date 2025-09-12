@@ -1,8 +1,9 @@
-﻿@model Beldsoft.MVC.ViewModels.SiteSettings.SiteSettingsGetAllViewModel
+﻿@model Beldsoft.MVC.ViewModels.Contact.ContactSpaceViewModel
 
 <section class="space space-extra-bottom overflow-hidden">
     <div class="container">
         <div class="row gx-60">
+            <!-- Sol taraf: SiteSettings bilgileri -->
             <div class="col-lg-5 mb-30">
                 <div class="vs-title title-anime animation-style2 mb-3">
                     <div class="title-anime__wrap">
@@ -11,10 +12,10 @@
                     </div>
                 </div>
 
-                @if (Model != null)
+                @if (Model.SiteSettings != null)
                 {
                     <div class="contact-info mb-20 wow animate__fadeInUp" data-wow-delay="0.45s">
-                        <span>Adres:</span> @Model.Address
+                        <span>Adres:</span> @Model.SiteSettings.Address
                     </div>
 
                     <div class="mb-20">
@@ -24,8 +25,8 @@
                             </div>
                             <div class="address-info__content">
                                 <span>Telefon Numarası :</span>
-                                <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a>,
-                                <a href="tel:@Model.SupportPhone">@Model.SupportPhone</a>
+                                <a href="tel:@Model.SiteSettings.PhoneNumber">@Model.SiteSettings.PhoneNumber</a>,
+                                <a href="tel:@Model.SiteSettings.SupportPhone">@Model.SiteSettings.SupportPhone</a>
                             </div>
                         </div>
                         <div class="address-info wow animate__fadeInUp" data-wow-delay="0.65s">
@@ -34,60 +35,72 @@
                             </div>
                             <div class="address-info__content">
                                 <span>Email :</span>
-                                <a class="text-lowercase" href="mailto:@Model.Email">@Model.Email</a>
+                                <a class="text-lowercase" href="mailto:@Model.SiteSettings.Email">@Model.SiteSettings.Email</a>
                             </div>
                         </div>
                     </div>
 
-                    <img class="contact-divider" src="@Model.LogoUrl" alt="@Model.SiteName">
+                    <img class="contact-divider" src="@Model.SiteSettings.LogoUrl" alt="@Model.SiteSettings.SiteName">
 
                     <div class="social-style style2">
                         <span class="social-style__label">Takip Edin :</span>
-                        @if (!string.IsNullOrEmpty(Model.FacebookUrl))
+                        @if (!string.IsNullOrEmpty(Model.SiteSettings.FacebookUrl))
                         {
-                            <a href="@Model.FacebookUrl"><i class="fab fa-facebook-f"></i></a>
+                            <a href="@Model.SiteSettings.FacebookUrl"><i class="fab fa-facebook-f"></i></a>
                         }
-                        @if (!string.IsNullOrEmpty(Model.InstagramUrl))
+                        @if (!string.IsNullOrEmpty(Model.SiteSettings.InstagramUrl))
                         {
-                            <a href="@Model.InstagramUrl"><i class="fab fa-instagram"></i></a>
+                            <a href="@Model.SiteSettings.InstagramUrl"><i class="fab fa-instagram"></i></a>
                         }
-                        @if (!string.IsNullOrEmpty(Model.LinkedinUrl))
+                        @if (!string.IsNullOrEmpty(Model.SiteSettings.LinkedinUrl))
                         {
-                            <a href="@Model.LinkedinUrl"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="@Model.SiteSettings.LinkedinUrl"><i class="fab fa-linkedin-in"></i></a>
                         }
-                        @if (!string.IsNullOrEmpty(Model.YoutubeUrl))
+                        @if (!string.IsNullOrEmpty(Model.SiteSettings.YoutubeUrl))
                         {
-                            <a href="@Model.YoutubeUrl"><i class="fab fa-youtube"></i></a>
+                            <a href="@Model.SiteSettings.YoutubeUrl"><i class="fab fa-youtube"></i></a>
                         }
                     </div>
                 }
             </div>
 
+
+            <!-- Sağ taraf: Contact form -->
             <div class="col-lg-7 mb-30">
-                <form action="mail.php" method="post" class="form-style2 ajax-contact wow animate__fadeInUp" data-wow-delay="0.95s">
+                <form asp-controller="Contact" asp-action="Create" method="post" class="form-style2 wow animate__fadeInUp" data-wow-delay="0.95s">
+                    @Html.AntiForgeryToken()
                     <div class="row gx-20">
                         <div class="col-md-6 form-group">
-                            <input class="form-control" type="text" name="fname" id="fname" placeholder="Adınız *">
+                            <input class="form-control" asp-for="ContactMessage.FirstName" placeholder="Adınız *" />
                         </div>
                         <div class="col-md-6 form-group">
-                            <input class="form-control" type="text" name="lname" id="lname" placeholder="Soyadınız *">
+                            <input class="form-control" asp-for="ContactMessage.LastName" placeholder="Soyadınız *" />
                         </div>
                         <div class="col-md-6 form-group">
-                            <input class="form-control" type="email" name="email" id="email" placeholder="Email *">
+                            <input class="form-control" asp-for="ContactMessage.Email" placeholder="Email *" />
                         </div>
                         <div class="col-md-6 form-group">
-                            <input class="form-control" type="tel" name="phone" id="phone" placeholder="Telefon *">
+                            <input class="form-control" asp-for="ContactMessage.Phone" placeholder="Telefon *" />
                         </div>
                         <div class="col-12 form-group">
-                            <textarea class="form-control" name="message" id="message" placeholder="Mesajınız *" rows="5"></textarea>
+                            <textarea class="form-control" asp-for="ContactMessage.Message" placeholder="Mesajınız *" rows="5"></textarea>
                         </div>
                         <div class="col-12">
-                            <button class="vs-btn"><span class="vs-btn__border"></span>Gönder</button>
+                            <button class="vs-btn" type="submit"><span class="vs-btn__border"></span>Gönder</button>
                         </div>
                     </div>
                     <p class="form-messages mb-0 mt-3"></p>
                 </form>
             </div>
+
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+
         </div>
     </div>
 </section>
