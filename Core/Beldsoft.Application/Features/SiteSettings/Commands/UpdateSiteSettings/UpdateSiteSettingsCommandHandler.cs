@@ -26,6 +26,7 @@ namespace Beldsoft.Application.Features.SiteSettings.Commands.UpdateSiteSettings
             siteSettings.LogoUrl = request.LogoUrl;
             siteSettings.FooterLogoUrl = request.FooterLogoUrl;
             siteSettings.CopyrightText = request.CopyrightText;
+            siteSettings.GoogleMapAddress = request.GoogleMapAddress;
 
             // Ýletiþim Bilgileri
             siteSettings.PhoneNumber = request.PhoneNumber;

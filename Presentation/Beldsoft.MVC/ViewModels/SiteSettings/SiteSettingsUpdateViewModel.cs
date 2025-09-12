@@ -11,6 +11,8 @@ namespace Beldsoft.MVC.ViewModels.SiteSettings
         public string? LogoUrl { get; set; }
         public IFormFile? LogoFile { get; set; }  // Tek logo yükleme
         public string? CopyrightText { get; set; }
+        public string? GoogleMapAddress { get; set; }
+
 
         // İletişim Bilgileri
         public string? PhoneNumber { get; set; }

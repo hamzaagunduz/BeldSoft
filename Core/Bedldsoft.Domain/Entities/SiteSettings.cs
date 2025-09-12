@@ -15,6 +15,8 @@ namespace Beldsoft.Domain.Entities
         public string? LogoUrl { get; set; }
         public string? FooterLogoUrl { get; set; }
         public string? CopyrightText { get; set; }
+        public string? GoogleMapAddress { get; set; }
+
 
         // İletişim Bilgileri
         public string? PhoneNumber { get; set; }

@@ -29,6 +29,7 @@ namespace Beldsoft.Application.Features.SiteSettings.Queries.GetSiteSettingsById
                 SiteName = siteSettings.SiteName,
                 LogoUrl = siteSettings.LogoUrl,
                 FooterLogoUrl = siteSettings.FooterLogoUrl,
+                GoogleMapAddress=siteSettings.GoogleMapAddress,
                 CopyrightText = siteSettings.CopyrightText,
                 PhoneNumber = siteSettings.PhoneNumber,
                 SupportPhone = siteSettings.SupportPhone,

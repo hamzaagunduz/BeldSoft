@@ -30,7 +30,9 @@ namespace Beldsoft.Infrastructure.Repositories
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet
+                .OrderByDescending(x => EF.Property<int>(x, "Id"))
+                .ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)

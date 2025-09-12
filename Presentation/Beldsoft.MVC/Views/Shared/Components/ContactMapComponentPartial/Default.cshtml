@@ -1,10 +1,15 @@
-﻿<div>
+﻿@model Beldsoft.MVC.ViewModels.SiteSettings.SiteSettingsGetAllViewModel
+<div>
     <div class="vs-map wow animate__fadeInUp" data-wow-delay="0.25s">
         <!-- Get Map -->
         <div class="mapouter">
             <div class="gmap_canvas">
-                <iframe class="gmap_iframe" style="width: 100%; height: 447px; border: 0; overflow: hidden;" src="https://maps.google.com/maps?width=600&height=447&hl=en&q=2880%20Broadway,%20New%20York&t=&z=14&ie=UTF8&iwloc=B&output=embed" allowfullscreen>
+                <iframe class="gmap_iframe"
+                        style="width:100%; height:447px; border:0; overflow:hidden;"
+                        src="@Model.GoogleMapAddress"
+                        allowfullscreen>
                 </iframe>
+
                 <a class="gmap_canvas__credit" href="https://embed-googlemap.com">embed google map</a>
             </div>
         </div>

@@ -1,0 +1,105 @@
+﻿@model List<Beldsoft.MVC.ViewModels.Contact.ContactMessageGetAllViewModel>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h4 class="card-title">İletişim Mesajları</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body pt-0">
+        <div class="table-responsive">
+            <table class="table mb-0" id="contactTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Email</th>
+                        <th>Telefon</th>
+                        <th>Mesaj</th>
+                        <th>Tarih</th>
+                        <th class="text-end">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>
+                                <a href="mailto:@item.Email" class="text-body text-decoration-underline">@item.Email</a>
+                            </td>
+                            <td>@item.Phone</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#messageModal"
+                                        data-message="@item.Message">
+                                    Oku
+                                </button>
+                            </td>
+                            <td>@item.CreatedDate?.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td class="text-end">
+                                <form asp-action="Delete" asp-route-id="@item.Id" method="post"
+                                      onsubmit="return confirm('Bu mesajı silmek istediğinize emin misiniz?');"
+                                      style="display:inline;">
+                                    <button type="submit" class="btn btn-link text-danger p-0">
+                                        <i class="las la-trash-alt fs-18"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">Mesaj İçeriği</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body" id="modalMessageContent">
+                <!-- Mesaj buraya gelecek -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- simple-datatables -->
+    <script src="~/approx-v1.0/dist/assets/libs/simple-datatables/umd/simple-datatables.js"></script>
+
+    <script>
+        // Modal mesaj gösterme
+        var messageModal = document.getElementById('messageModal');
+        messageModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+                var message = button.getAttribute('data-message');
+                var modalBody = document.getElementById('modalMessageContent');
+                modalBody.textContent = message;
+            });
+
+            // DataTable başlatma
+            document.addEventListener("DOMContentLoaded", function () {
+                const dataTable = new simpleDatatables.DataTable("#contactTable", {
+                    searchable: true,
+                    fixedHeight: true,
+                    perPageSelect: [5, 10, 15, 20, 25],
+                    perPage: 10
+                });
+            });
+    </script>
+}

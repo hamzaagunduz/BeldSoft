@@ -28,6 +28,7 @@ namespace Beldsoft.Application.Features.SiteSettings.Queries.GetAllSiteSettings
                 SiteName = s.SiteName,
                 LogoUrl = s.LogoUrl,
                 FooterLogoUrl = s.FooterLogoUrl,
+                GoogleMapAddress=s.GoogleMapAddress,
                 CopyrightText = s.CopyrightText,
                 PhoneNumber = s.PhoneNumber,
                 SupportPhone = s.SupportPhone,
