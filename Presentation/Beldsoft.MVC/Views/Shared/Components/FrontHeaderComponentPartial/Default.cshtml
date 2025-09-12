@@ -1,6 +1,8 @@
-﻿<header class="vs-header">
-    <!-- Header Element -->
+﻿@model Beldsoft.MVC.ViewModels.SiteSettings.SiteSettingsGetAllViewModel
+
+<header class="vs-header">
     <div class="vs-balls"></div>
+
     <!-- Header Top -->
     <div class="vs-header__top">
         <div class="container container--custom">
@@ -9,92 +11,78 @@
                     <div class="d-flex align-items-center flex-wrap gap-4">
                         <div class="vs-header__info">
                             <i class="fa-solid fa-phone-volume"></i>
-                            <span> Phone : <a href="tel:+1333456888">+1 333 456 888</a></span>
+                            <span> Telefon : <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a></span>
                         </div>
                         <div class="vs-header__info">
                             <i class="fa-solid fa-clock-rotate-left"></i>
                             <span class="text-theme-color5">
-                                Opening Time :
-                                <a href="tel:9:30am-5:30pm">9:30am-5:30pm</a>
+                                Açılış zamanı : @Model.OpeningTime
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-auto">
                     <div class="social-style">
-                        <span class="social-style__label">follow us :</span>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <span class="social-style__label">Bizi Takip Et :</span>
+                        @if (!string.IsNullOrEmpty(Model.FacebookUrl))
+                        {
+                            <a href="@Model.FacebookUrl" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.LinkedinUrl))
+                        {
+                            <a href="@Model.LinkedinUrl" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.YoutubeUrl))
+                        {
+                            <a href="@Model.YoutubeUrl" target="_blank"><i class="fab fa-youtube"></i></a>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.InstagramUrl))
+                        {
+                            <a href="@Model.InstagramUrl" target="_blank"><i class="fab fa-instagram"></i></a>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Sticky Header -->
     <div class="sticky-wrapper">
         <div class="sticky-active">
             <div class="container container--custom">
                 <div class="row justify-content-between align-items-center">
                     <div class="col">
                         <div class="vs-header__logo">
-                            <a href="index.html"><img src="~/toddly/assets/img/logo.svg" alt="Toddly" class="logo"></a>
+                            <a href="/">
+                                @if (!string.IsNullOrEmpty(Model.LogoUrl))
+                                {
+                                    <img src="@Model.LogoUrl" alt="@Model.SiteName" class="logo" />
+                                }
+                                else
+                                {
+                                    <img src="~/toddly/assets/img/logo.svg" alt="logo" class="logo" />
+                                }
+                            </a>
                         </div>
                     </div>
+
                     <div class="col-auto">
                         <nav class="main-menu d-none d-lg-block">
                             <ul>
-                                <li>
-                                    <a class="vs-svg-assets" href="index.html">
-                                        HOME
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="87" height="31" viewBox="0 0 87 31" fill="none">
-                                            <path d="M0 4.14031C0 1.87713 1.87602 0.0646902 4.13785 0.142684L83.1379 2.86682C85.2921 2.94111 87 4.70896 87 6.86445V25.0909C87 27.2642 85.2647 29.0399 83.0919 29.0898L4.09193 30.9059C1.84739 30.9575 0 29.1521 0 26.907V4.14031Z" fill="#70167E"></path>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="vs-svg-assets" href="about.html">
-                                        ABOUT
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="87" height="31" viewBox="0 0 87 31" fill="none">
-                                            <path d="M0 4.14031C0 1.87713 1.87602 0.0646902 4.13785 0.142684L83.1379 2.86682C85.2921 2.94111 87 4.70896 87 6.86445V25.0909C87 27.2642 85.2647 29.0399 83.0919 29.0898L4.09193 30.9059C1.84739 30.9575 0 29.1521 0 26.907V4.14031Z" fill="#70167E"></path>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="vs-svg-assets" href="blog.html">
-                                        BLOG
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="87" height="31" viewBox="0 0 87 31" fill="none">
-                                            <path d="M0 4.14031C0 1.87713 1.87602 0.0646902 4.13785 0.142684L83.1379 2.86682C85.2921 2.94111 87 4.70896 87 6.86445V25.0909C87 27.2642 85.2647 29.0399 83.0919 29.0898L4.09193 30.9059C1.84739 30.9575 0 29.1521 0 26.907V4.14031Z" fill="#70167E"></path>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="vs-svg-assets" href="contact.html">
-                                        CONTACT
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="87" height="31" viewBox="0 0 87 31" fill="none">
-                                            <path d="M0 4.14031C0 1.87713 1.87602 0.0646902 4.13785 0.142684L83.1379 2.86682C85.2921 2.94111 87 4.70896 87 6.86445V25.0909C87 27.2642 85.2647 29.0399 83.0919 29.0898L4.09193 30.9059C1.84739 30.9575 0 29.1521 0 26.907V4.14031Z" fill="#70167E"></path>
-                                        </svg>
-                                    </a>
-                                </li>
+                                <li><a href="/">ANASAYFA</a></li>
+                                <li><a href="/iletisim">İLETİŞİM</a></li>
                             </ul>
                         </nav>
                     </div>
+
                     <div class="col-auto">
                         <div class="vs-header__action">
                             <div class="d-none d-xxl-inline-flex">
-                                <a href="contact.html" class="vs-btn"><span class="vs-btn__border"></span>admission</a>
+                                <a href="/iletisim" class="vs-btn">VELİ SORGU</a>
                             </div>
                             <div class="d-none d-lg-inline-flex align-items-center">
-                                <button class="sideMenuToggler">
-                                    <svg width="31" height="23" viewBox="0 0 31 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.9165 4.5H28.4165C29.6594 4.5 30.6665 3.49292 30.6665 2.25C30.6665 1.00708 29.6594 0 28.4165 0H2.9165C1.67358 0 0.666504 1.00708 0.666504 2.25C0.666504 3.49292 1.67358 4.5 2.9165 4.5Z" fill="currentColor" />
-                                        <path d="M28.4165 9H2.9165C1.67358 9 0.666504 10.0071 0.666504 11.25C0.666504 12.4929 1.67358 13.5 2.9165 13.5H28.4165C29.6594 13.5 30.6665 12.4929 30.6665 11.25C30.6665 10.0071 29.6594 9 28.4165 9Z" fill="currentColor" />
-                                        <path d="M28.4165 18H2.9165C1.67358 18 0.666504 19.0071 0.666504 20.25C0.666504 21.4929 1.67358 22.5 2.9165 22.5H28.4165C29.6594 22.5 30.6665 21.4929 30.6665 20.25C30.6665 19.0071 29.6594 18 28.4165 18Z" fill="currentColor" />
-                                    </svg>
-                                </button>
+                                <button class="sideMenuToggler">☰</button>
                             </div>
-                            <button class="vs-menu-toggle style2 d-inline-block d-lg-none">
-                                <i class="fal fa-bars"></i>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -102,3 +90,17 @@
         </div>
     </div>
 </header>
+
+<div class="preloader">
+    <div class="preloader-inner">
+        @if (!string.IsNullOrEmpty(Model.LogoUrl))
+        {
+            <img src="@Model.LogoUrl" alt="@Model.SiteName">
+        }
+        else
+        {
+            <img src="~/toddly/assets/img/logo.svg" alt="logo">
+        }
+        <span class="loader"></span>
+    </div>
+</div>

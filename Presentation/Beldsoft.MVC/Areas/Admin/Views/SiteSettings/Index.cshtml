@@ -1,0 +1,66 @@
+﻿@model List<SiteSettingsGetAllViewModel>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h4 class="card-title">Site Settings</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body pt-0">
+        <div class="table-responsive">
+            <table class="table mb-0 datatable-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;"><button class="datatable-sorter">Site Name</button></th>
+                        <th style="width: 15%;"><button class="datatable-sorter">Logo</button></th>
+                        <th style="width: 20%;"><button class="datatable-sorter">Contact Info</button></th>
+                        <th style="width: 20%;"><button class="datatable-sorter">Social Media</button></th>
+                        <th class="text-end" style="width: 10%;"><button class="datatable-sorter">Action</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.SiteName</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.LogoUrl))
+                                    {
+                                        <img src="@item.LogoUrl" alt="@item.SiteName" style="max-height:50px;" />
+                                    }
+                                </td>
+                                <td>
+                                    @item.PhoneNumber <br />
+                                    @item.SupportPhone <br />
+                                    @item.Email
+                                </td>
+                                <td>
+                                    @item.FacebookUrl <br />
+                                    @item.LinkedinUrl <br />
+                                    @item.YoutubeUrl <br />
+                                    @item.InstagramUrl
+                                </td>
+                                <td class="text-end">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="me-2">
+                                        <i class="las la-pen text-secondary fs-18"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">No site settings found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

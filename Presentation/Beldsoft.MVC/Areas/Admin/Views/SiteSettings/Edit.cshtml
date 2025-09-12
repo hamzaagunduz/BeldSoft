@@ -1,0 +1,94 @@
+﻿@model SiteSettingsUpdateViewModel
+
+<div class="card">
+    <div class="card-body pt-0">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="LogoUrl" />
+
+            <!-- Genel Bilgiler -->
+            <div class="mb-3">
+                <label asp-for="SiteName"></label>
+                <input asp-for="SiteName" class="form-control" />
+                <span asp-validation-for="SiteName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Logo</label>
+                @if (!string.IsNullOrEmpty(Model.LogoUrl))
+                {
+                    <div class="mb-2">
+                        <img src="@Model.LogoUrl" style="max-width:150px;" />
+                    </div>
+                }
+                <input asp-for="LogoFile" type="file" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CopyrightText"></label>
+                <input asp-for="CopyrightText" class="form-control" />
+            </div>
+
+            <!-- İletişim Bilgileri -->
+            <div class="mb-3">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="SupportPhone"></label>
+                <input asp-for="SupportPhone" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="OpeningTime"></label>
+                <input asp-for="OpeningTime" class="form-control" />
+            </div>
+
+            <!-- Sosyal Medya -->
+            <div class="mb-3">
+                <label asp-for="FacebookUrl"></label>
+                <input asp-for="FacebookUrl" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="LinkedinUrl"></label>
+                <input asp-for="LinkedinUrl" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="YoutubeUrl"></label>
+                <input asp-for="YoutubeUrl" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="InstagramUrl"></label>
+                <input asp-for="InstagramUrl" class="form-control" />
+            </div>
+
+            <!-- Footer Linkleri -->
+            <div class="mb-3">
+                <label asp-for="TermsUrl"></label>
+                <input asp-for="TermsUrl" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="PrivacyPolicyUrl"></label>
+                <input asp-for="PrivacyPolicyUrl" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="ContactPageUrl"></label>
+                <input asp-for="ContactPageUrl" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="ParentQueryPageUrl"></label>
+                <input asp-for="ParentQueryPageUrl" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+            <a asp-action="Index" asp-area="Admin" class="btn btn-secondary mt-3 ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
