@@ -14,6 +14,7 @@ namespace Beldsoft.MVC.Mapping
             CreateMap<ChildUpdateViewModel, UpdateChildCommand>();
             CreateMap<GetAllChildResult, ChildGetAllViewModel>();
             CreateMap<GetChildByIdResult, ChildGetByIdViewModel>();
+            CreateMap<GetChildByIdResult, ChildUpdateViewModel>();
             CreateMap<GetAllChildForTodayResult, GetAllChildForTodayViewModel>();
         }
     }

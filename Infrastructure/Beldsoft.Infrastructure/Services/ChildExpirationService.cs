@@ -41,7 +41,7 @@ namespace Beldsoft.Infrastructure.Services
 
             var now = DateTime.UtcNow;
 
-            var allChildren = await childRepo.GetAllAsync(); // tüm kayıtları al
+            var allChildren = await childRepo.GetChildrenForTodayAsync(); // tüm kayıtları al
             var expiredChildren = allChildren
                 .Where(c => (c.IsExpired ?? false) == false)
                 .Where(c => c.ExpirationTime.HasValue && c.ExpirationTime.Value <= DateTime.Now)

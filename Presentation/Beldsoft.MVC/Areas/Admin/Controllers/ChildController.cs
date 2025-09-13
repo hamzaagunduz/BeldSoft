@@ -73,7 +73,7 @@ namespace Beldsoft.MVC.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost("Edit/{id}")]
+        [HttpPost("Edit")]
         public async Task<IActionResult> Edit(ChildUpdateViewModel model)
         {
             var command = _mapper.Map<UpdateChildCommand>(model);
@@ -87,8 +87,10 @@ namespace Beldsoft.MVC.Areas.Admin.Controllers
                 return View(model);
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Child", new { area = "Admin" });
         }
+
+
 
         [HttpPost("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)

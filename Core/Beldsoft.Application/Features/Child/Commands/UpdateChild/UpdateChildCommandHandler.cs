@@ -21,7 +21,7 @@ namespace Beldsoft.Application.Features.Child.Commands.UpdateChild
             if (child == null)
                 return CommonResponse<int>.Fail(new[] { "Child not found" });
 
-            // Çocuk bilgileri
+            // Çocuk bilgilerini güncelle
             if (!string.IsNullOrEmpty(request.FirstName))
                 child.FirstName = request.FirstName;
 
@@ -31,19 +31,26 @@ namespace Beldsoft.Application.Features.Child.Commands.UpdateChild
             if (!string.IsNullOrEmpty(request.ParentPhone))
                 child.ParentPhone = request.ParentPhone;
 
-            // Giriþ bilgileri
-            if (request.ArrivalTime.HasValue)
-                child.ArrivalTime = request.ArrivalTime;
-
             if (request.DurationMinutes.HasValue)
                 child.DurationMinutes = request.DurationMinutes;
 
             if (request.IsExpired.HasValue)
                 child.IsExpired = request.IsExpired.Value;
 
+            // Burada yeni DurationMinutes güncellendiyse ve ExpirationTime þimdiki zamandan ilerideyse
+            if (child.ExpirationTime.HasValue && child.ExpirationTime.Value > DateTime.Now)
+            {
+                child.IsExpired = false; // otomatik olarak sürenin devam ettiðini iþaretle
+            }
+            else if (child.ExpirationTime.HasValue && child.ExpirationTime.Value <= DateTime.Now)
+            {
+                child.IsExpired = true; // süresi dolduysa otomatik true yap
+            }
+
             await _childRepository.UpdateAsync(child);
 
             return CommonResponse<int>.Success(child.Id);
         }
+
     }
 }

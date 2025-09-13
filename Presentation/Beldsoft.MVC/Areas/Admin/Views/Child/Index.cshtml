@@ -59,10 +59,19 @@
                             </td>
                             <td class="expired-cell">@(child.IsExpired == true ? "Evet" : "Hayır")</td>
                             <td class="text-end">
-                                <a href="@Url.Action("Edit", "Child", new { area="Admin", id = child.Id })" class="btn btn-sm btn-warning">Düzenle</a>
-                                <form asp-action="Delete" asp-route-id="@child.Id" method="post" class="d-inline">
-                                    <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                                <a href="javascript:void(0);" class="btn btn-sm btn-warning edit-btn"
+                                   data-id="@child.Id"
+                                   data-firstname="@child.FirstName"
+                                   data-lastname="@child.LastName"
+                                   data-parentphone="@child.ParentPhone"
+                                   data-duration="@child.DurationMinutes">
+                                    Düzenle
+                                </a>
+
+                                <form id="deleteForm_@child.Id" asp-action="Delete" asp-route-id="@child.Id" method="post" class="d-inline">
+                                    <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(@child.Id)">Sil</button>
                                 </form>
+
                             </td>
                         </tr>
                     }
@@ -118,6 +127,61 @@
         </div>
     </div>
 </div>
+
+<!-- Düzenle Modal -->
+<!-- Düzenle Modal -->
+<div class="modal fade" id="editChildModal" tabindex="-1" aria-labelledby="editChildLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editChildLabel">Çocuk Düzenle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Form, Controller'a POST edecek -->
+                <form id="editChildForm" method="post" asp-action="Edit" asp-controller="Child" asp-area="Admin">
+                    <input type="hidden" name="Id" id="editChildId" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Ad</label>
+                        <input type="text" class="form-control" name="FirstName" id="editFirstName" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Soyad</label>
+                        <input type="text" class="form-control" name="LastName" id="editLastName" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Veli Telefon</label>
+                        <input type="text" class="form-control" name="ParentPhone" id="editParentPhone" required />
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label">Kalma Süresi</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="editHourInput" placeholder="Saat" min="0" />
+                            </div>
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="editMinuteInput" placeholder="Dakika" min="0" max="59" />
+                            </div>
+                        </div>
+                        <input type="hidden" id="editDurationInput" name="DurationMinutes" />
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-primary w-100">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 <!-- Child Expired Modal -->
@@ -212,9 +276,56 @@
         });
 
 
-
-
-
             connection.start().catch(err => console.error(err.toString()));
     </script>
+
+
+    <script>
+        function confirmDelete(id) {
+            if(confirm("Bu çocuğu silmek istediğinizden emin misiniz?")){
+                document.getElementById(`deleteForm_${id}`).submit();
+            }
+        }
+
+    </script>
+
+
+    <script>
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Butondan veri al
+                const id = this.dataset.id;
+                const firstName = this.dataset.firstname;
+                const lastName = this.dataset.lastname;
+                const parentPhone = this.dataset.parentphone;
+                const duration = parseInt(this.dataset.duration) || 0;
+
+                // Saat ve dakika hesapla
+                const hours = Math.floor(duration / 60);
+                const minutes = duration % 60;
+
+                // Modal inputlarını doldur
+                document.getElementById('editChildId').value = id;
+                document.getElementById('editFirstName').value = firstName;
+                document.getElementById('editLastName').value = lastName;
+                document.getElementById('editParentPhone').value = parentPhone;
+                document.getElementById('editHourInput').value = hours;
+                document.getElementById('editMinuteInput').value = minutes;
+                document.getElementById('editDurationInput').value = duration;
+
+                // Modalı göster
+                const modalEl = document.getElementById('editChildModal');
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            });
+        });
+
+        // Form submit sırasında hidden duration inputunu güncelle
+        document.getElementById('editChildForm').addEventListener('submit', function() {
+            const hours = parseInt(document.getElementById("editHourInput").value) || 0;
+            const minutes = parseInt(document.getElementById("editMinuteInput").value) || 0;
+            document.getElementById("editDurationInput").value = (hours * 60) + minutes;
+        });
+    </script>
+
 }
