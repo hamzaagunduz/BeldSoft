@@ -23,6 +23,7 @@ namespace Beldsoft.Persistence.Context
         public DbSet<FeedbackSection> FeedbackSections { get; set; }
         public DbSet<SiteSettings> SiteSettings { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<Child> Childs { get; set; }
 
     }
 }

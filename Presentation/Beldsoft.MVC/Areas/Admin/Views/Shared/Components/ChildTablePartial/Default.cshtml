@@ -1,0 +1,48 @@
+﻿@model List<Beldsoft.MVC.ViewModels.Child.ChildGetAllViewModel>
+
+<table class="table mb-0 datatable-table">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Veli Telefon</th>
+            <th>Geliş Saati</th>
+            <th>Süre (dk)</th>
+            <th>Süresi Doldu mu?</th>
+            <th class="text-end">İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var child in Model)
+        {
+            var rowClass = child.IsExpired == true ? "table-danger" : "table-success";
+            <tr class="@rowClass">
+                <td>@child.FirstName</td>
+                <td>@child.LastName</td>
+                <td>@child.ParentPhone</td>
+                <td>@child.ArrivalTime?.ToString("HH:mm")</td>
+                <td>
+                    @{
+                        var hours = child.DurationMinutes / 60;
+                        var minutes = child.DurationMinutes % 60;
+                    }
+                    @if (hours > 0)
+                    {
+                        @($"{hours} saat {(minutes > 0 ? minutes + " dk" : "")}")
+                    }
+                    else
+                    {
+                        @($"{minutes} dk")
+                    }
+                </td>
+                <td>@(child.IsExpired == true ? "Evet" : "Hayır")</td>
+                <td class="text-end">
+                    <a href="@Url.Action("Edit", "Child", new { area="Admin", id = child.Id })" class="btn btn-sm btn-warning">Düzenle</a>
+                    <form asp-action="Delete" asp-route-id="@child.Id" method="post" class="d-inline delete-form">
+                        <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

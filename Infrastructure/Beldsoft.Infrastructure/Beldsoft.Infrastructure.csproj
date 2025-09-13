@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Core\Bedldsoft.Domain\Bedldsoft.Domain.csproj" />
     <ProjectReference Include="..\..\Core\Beldsoft.Application\Beldsoft.Application.csproj" />
+    <ProjectReference Include="..\Beldsoft.Persistence\Beldsoft.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

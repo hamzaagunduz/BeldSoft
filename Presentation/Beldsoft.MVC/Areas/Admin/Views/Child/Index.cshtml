@@ -1,0 +1,194 @@
+﻿@model List<Beldsoft.MVC.ViewModels.Child.ChildGetAllViewModel>
+
+@{
+    ViewData["Title"] = "Çocuklar";
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="card-title mb-0">Günlük Çocuklar</h4>
+        <button class="btn bg-primary text-white" data-bs-toggle="modal" data-bs-target="#addChild">
+            <i class="fas fa-plus me-1"></i> Çocuk Ekle
+        </button>
+    </div>
+
+    <div class="card-body pt-0">
+        <div class="table-responsive">
+            <table class="table mb-0 datatable-table">
+                <thead>
+                    <tr>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Veli Telefon</th>
+                        <th>Geliş Saati</th>
+                        <th>Süre (dk)</th>
+                        <th>Süresi Doldu mu?</th>
+                        <th class="text-end">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var child in Model)
+                    {
+                        var rowClass = child.IsExpired == true ? "table-danger" : "table-success";
+                        <tr data-child-id="@child.Id" class="@rowClass">
+                            <td>@child.FirstName</td>
+                            <td>@child.LastName</td>
+                            <td>@child.ParentPhone</td>
+                            <td>@child.ArrivalTime?.ToString("HH:mm")</td>
+                            <td>
+                                @{
+                                    var hours = child.DurationMinutes / 60;
+                                    var minutes = child.DurationMinutes % 60;
+                                }
+                                @if (hours > 0)
+                                {
+                                    @($"{hours} saat {(minutes > 0 ? minutes + " dk" : "")}")
+                                }
+                                else
+                                {
+                                    @($"{minutes} dk")
+                                }
+                            </td>
+                            <td class="expired-cell">@(child.IsExpired == true ? "Evet" : "Hayır")</td>
+                            <td class="text-end">
+                                <a href="@Url.Action("Edit", "Child", new { area="Admin", id = child.Id })" class="btn btn-sm btn-warning">Düzenle</a>
+                                <form asp-action="Delete" asp-route-id="@child.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Çocuk Ekleme Modal -->
+<div class="modal fade" id="addChild" tabindex="-1" aria-labelledby="addChildLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addChildLabel">Çocuk Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form asp-action="Create" method="post" onsubmit="return calculateDuration()">
+                    <div class="mb-3">
+                        <label class="form-label">Ad</label>
+                        <input type="text" class="form-control" name="FirstName" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Soyad</label>
+                        <input type="text" class="form-control" name="LastName" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Veli Telefon</label>
+                        <input type="text" class="form-control" name="ParentPhone" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Kalma Süresi</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="hourInput" placeholder="Saat" min="0" />
+                            </div>
+                            <div class="col-6">
+                                <input type="number" class="form-control" id="minuteInput" placeholder="Dakika" min="0" max="59" />
+                            </div>
+                        </div>
+                        <input type="hidden" id="durationInput" name="DurationMinutes" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Child Expired Modal -->
+<div class="modal fade" id="childExpiredModal" tabindex="-1" aria-labelledby="childExpiredModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-danger">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="childExpiredModalLabel">Çocuk Süresi Doldu!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <p id="childExpiredText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.7/signalr.min.js"></script>
+    <script>
+            function calculateDuration() {
+            let hours = parseInt(document.getElementById("hourInput").value) || 0;
+            let minutes = parseInt(document.getElementById("minuteInput").value) || 0;
+                document.getElementById("durationInput").value = (hours * 60) + minutes;
+            return true; // form gönderilsin
+        }
+
+            // Modal kuyruk
+            const childQueue = [];
+            let modalShowing = false;
+
+            function showNextChildModal() {
+                if(childQueue.length === 0){
+                    modalShowing = false;
+                    return;
+                }
+
+                modalShowing = true;
+                const child = childQueue.shift();
+
+                // Modal içeriğini güncelle
+                document.getElementById("childExpiredText").textContent = `${child.name} adlı çocuğun süresi doldu!`;
+
+                const modalEl = document.getElementById('childExpiredModal');
+                const modal = new bootstrap.Modal(modalEl);
+
+                // Modal kapandığında bir sonraki mesajı göster
+                modalEl.addEventListener('hidden.bs.modal', function () {
+                    showNextChildModal();
+                }, { once: true });
+
+                modal.show();
+            }
+
+            // SignalR bağlantısı
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/childHub")
+                .build();
+
+            connection.on("ReceiveChildExpired", (childId, childName) => {
+                // Tabloyu anlık güncelle
+                const row = document.querySelector(`tr[data-child-id='${childId}']`);
+                if(row){
+                    row.classList.remove("table-success");
+                    row.classList.add("table-danger");
+
+                    const expiredCell = row.querySelector(".expired-cell");
+                    if(expiredCell) expiredCell.textContent = "Evet";
+                }
+
+                // Kuyruğa ekle ve modalı göster
+                childQueue.push({ id: childId, name: childName });
+                if(!modalShowing){
+                    showNextChildModal();
+                }
+            });
+
+            connection.start().catch(err => console.error(err.toString()));
+    </script>
+}

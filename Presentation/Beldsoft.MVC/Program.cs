@@ -1,6 +1,9 @@
 using Bedldsoft.Domain.Entities;
+using Beldsoft.Application.Interfaces.IChildExpirationService;
 using Beldsoft.Application.Interfaces.IFileService;
+using Beldsoft.Application.Interfaces.INotificationService;
 using Beldsoft.Application.ServiceRegister;
+using Beldsoft.Infrastructure.Hubs;
 using Beldsoft.Infrastructure.Services;
 using Beldsoft.Persistence.Context;
 using Beldsoft.Persistence.ServiceRegister;
@@ -11,12 +14,22 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSignalR();
 builder.Services.AddControllersWithViews();
 
 // DbContext kaydý
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationService(builder.Configuration);
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddHostedService<ChildExpirationService>();
+builder.Services.AddScoped<INotificationService, SignalRNotificationService>();
+builder.Services.AddHostedService<ChildExpirationService>(sp =>
+{
+    return sp.GetRequiredService<IChildExpirationService>() as ChildExpirationService;
+});
+
+
+
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -43,6 +56,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
+app.MapHub<ChildHub>("/childHub");
 
 
 

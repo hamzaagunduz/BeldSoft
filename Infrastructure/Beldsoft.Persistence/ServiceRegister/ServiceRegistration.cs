@@ -15,6 +15,7 @@ using Beldsoft.Application.Interfaces.IGallerySectionRepository;
 using Beldsoft.Application.Interfaces.IFeedbackSectionRepository;
 using Beldsoft.Application.Interfaces.ISiteSettingsRepository;
 using Beldsoft.Application.Interfaces.IContactMessageRepository;
+using Beldsoft.Application.Interfaces.IChildRepository;
 
 namespace Beldsoft.Persistence.ServiceRegister
 {
@@ -40,6 +41,7 @@ namespace Beldsoft.Persistence.ServiceRegister
             services.AddScoped<IFeedbackSectionRepository, FeedbackSectionRepository>();
             services.AddScoped<ISiteSettingsRepository, SiteSettingsRepository>();
             services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
+            services.AddScoped<IChildRepository, ChildRepository>();
 
 
         }
