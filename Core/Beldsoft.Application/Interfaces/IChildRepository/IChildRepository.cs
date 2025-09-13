@@ -9,6 +9,8 @@ namespace Beldsoft.Application.Interfaces.IChildRepository
 {
     public interface IChildRepository : IRepository<Child>
     {
+        Task<List<Child>> GetChildrenForTodayAsync();
+        Task<List<Child>> GetChildrenByParentPhoneAsync(string parentPhone);
 
     }
 }

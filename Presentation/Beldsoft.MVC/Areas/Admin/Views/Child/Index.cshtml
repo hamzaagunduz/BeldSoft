@@ -1,4 +1,4 @@
-﻿@model List<Beldsoft.MVC.ViewModels.Child.ChildGetAllViewModel>
+﻿@model List<GetAllChildForTodayViewModel>
 
 @{
     ViewData["Title"] = "Çocuklar";
@@ -21,6 +21,7 @@
                         <th>Soyad</th>
                         <th>Veli Telefon</th>
                         <th>Geliş Saati</th>
+                        <th>Çıkış Saati</th> <!-- Yeni sütun -->
                         <th>Süre (dk)</th>
                         <th>Süresi Doldu mu?</th>
                         <th class="text-end">İşlemler</th>
@@ -35,6 +36,13 @@
                             <td>@child.LastName</td>
                             <td>@child.ParentPhone</td>
                             <td>@child.ArrivalTime?.ToString("HH:mm")</td>
+                            <td>
+                                @if (child.ArrivalTime.HasValue && child.DurationMinutes.HasValue)
+                                {
+                                    var exitTime = child.ArrivalTime.Value.AddMinutes((double)child.DurationMinutes.Value);
+                                    @exitTime.ToString("HH:mm")
+                                }
+                            </td>
                             <td>
                                 @{
                                     var hours = child.DurationMinutes / 60;
@@ -60,6 +68,7 @@
                     }
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>
@@ -169,25 +178,42 @@
             // SignalR bağlantısı
             const connection = new signalR.HubConnectionBuilder()
                 .withUrl("/childHub")
+                .withAutomaticReconnect()
                 .build();
 
-            connection.on("ReceiveChildExpired", (childId, childName) => {
-                // Tabloyu anlık güncelle
-                const row = document.querySelector(`tr[data-child-id='${childId}']`);
-                if(row){
-                    row.classList.remove("table-success");
-                    row.classList.add("table-danger");
 
-                    const expiredCell = row.querySelector(".expired-cell");
-                    if(expiredCell) expiredCell.textContent = "Evet";
-                }
+        connection.on("ReceiveChildExpired", (childId, childName) => {
+            const row = document.querySelector(`tr[data-child-id='${childId}']`);
+            if (row) {
+                const expiredCell = row.querySelector(".expired-cell");
+                if (expiredCell) expiredCell.textContent = "Evet";
 
-                // Kuyruğa ekle ve modalı göster
-                childQueue.push({ id: childId, name: childName });
-                if(!modalShowing){
-                    showNextChildModal();
+                // Satırı kırmızıya çevir
+                row.classList.remove("table-success");
+                row.classList.add("table-danger");
+
+                const tbody = row.parentElement;
+
+                // İlk kırmızı satırı bul (table-danger)
+                const firstRedRow = tbody.querySelector("tr.table-danger:not([data-child-id='" + childId + "'])");
+
+                if (firstRedRow) {
+                    // Yeni kırmızı satırı ilk kırmızı satırın üstüne taşı
+                    tbody.insertBefore(row, firstRedRow);
                 }
-            });
+                // Eğer hiç kırmızı yoksa zaten olduğu yerde kalıyor
+            }
+
+            // Kuyruğa ekle ve modalı göster
+            childQueue.push({ id: childId, name: childName });
+            if (!modalShowing) {
+                showNextChildModal();
+            }
+        });
+
+
+
+
 
             connection.start().catch(err => console.error(err.toString()));
     </script>

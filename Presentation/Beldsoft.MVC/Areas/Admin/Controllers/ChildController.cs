@@ -3,6 +3,7 @@ using Beldsoft.Application.Features.Child.Commands.CreateChild;
 using Beldsoft.Application.Features.Child.Commands.DeleteChild;
 using Beldsoft.Application.Features.Child.Commands.UpdateChild;
 using Beldsoft.Application.Features.Child.Queries.GetAllChild;
+using Beldsoft.Application.Features.Child.Queries.GetAllChildForToday;
 using Beldsoft.Application.Features.Child.Queries.GetChildById;
 using Beldsoft.MVC.ViewModels.Child;
 using MediatR;
@@ -28,10 +29,10 @@ namespace Beldsoft.MVC.Areas.Admin.Controllers
         [HttpGet("")]
         public async Task<IActionResult> Index()
         {
-            var query = new GetAllChildQuery();
+            var query = new GetAllChildForTodayQuery();
             var response = await _mediator.Send(query);
 
-            var model = _mapper.Map<List<ChildGetAllViewModel>>(response.Data);
+            var model = _mapper.Map<List<GetAllChildForTodayViewModel>>(response.Data);
             return View(model);
         }
 
