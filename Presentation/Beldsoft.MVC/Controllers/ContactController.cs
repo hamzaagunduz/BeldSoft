@@ -24,12 +24,15 @@ namespace Beldsoft.MVC.Controllers
             return View();
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> Create(ContactSpaceViewModel model)
+        [HttpPost("iletisim")]
+        public async Task<IActionResult> iletisim(ContactSpaceViewModel model)
         {
             // ContactMessage property’si üzerinden al
             var command = _mapper.Map<CreateContactMessageCommand>(model.ContactMessage);
-
+            if (!ModelState.IsValid)
+            {
+                return View("Index", model); 
+            }
             var result = await _mediator.Send(command);
 
             if (!result.Succeeded)

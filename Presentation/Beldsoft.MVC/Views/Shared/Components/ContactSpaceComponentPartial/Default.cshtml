@@ -67,23 +67,28 @@
 
             <!-- Sağ taraf: Contact form -->
             <div class="col-lg-7 mb-30">
-                <form asp-controller="Contact" asp-action="Create" method="post" class="form-style2 wow animate__fadeInUp" data-wow-delay="0.95s">
+                <form asp-controller="Contact" asp-action="iletisim" method="post" class="form-style2 wow animate__fadeInUp" data-wow-delay="0.95s">
                     @Html.AntiForgeryToken()
                     <div class="row gx-20">
                         <div class="col-md-6 form-group">
                             <input class="form-control" asp-for="ContactMessage.FirstName" placeholder="Adınız *" />
+                            <span asp-validation-for="ContactMessage.FirstName" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 form-group">
                             <input class="form-control" asp-for="ContactMessage.LastName" placeholder="Soyadınız *" />
+                            <span asp-validation-for="ContactMessage.LastName" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 form-group">
                             <input class="form-control" asp-for="ContactMessage.Email" placeholder="Email *" />
+                            <span asp-validation-for="ContactMessage.Email" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 form-group">
                             <input class="form-control" asp-for="ContactMessage.Phone" placeholder="Telefon *" />
+                            <span asp-validation-for="ContactMessage.Phone" class="text-danger"></span>
                         </div>
                         <div class="col-12 form-group">
                             <textarea class="form-control" asp-for="ContactMessage.Message" placeholder="Mesajınız *" rows="5"></textarea>
+                            <span asp-validation-for="ContactMessage.Message" class="text-danger"></span>
                         </div>
                         <div class="col-12">
                             <button class="vs-btn" type="submit"><span class="vs-btn__border"></span>Gönder</button>
@@ -104,3 +109,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
