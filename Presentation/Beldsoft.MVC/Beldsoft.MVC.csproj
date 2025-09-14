@@ -16,6 +16,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
@@ -26,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\AppUser\" />
     <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\gmaps\docs\" />
     <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\gmaps\examples\" />
     <Folder Include="wwwroot\approx-v1.0\dist\assets\libs\gmaps\test\" />

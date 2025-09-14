@@ -1,0 +1,166 @@
+﻿@{
+    ViewData["Title"] = "Çocuğun Giriş-Çıkış Saatleri";
+}
+
+<section class="vs-event--page bg-color6 space z-index-common">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="vs-title text-center title-anime animation-style2 mb-4">
+                    <h2 class="vs-title__main">Çocuğun Giriş-Çıkış Saatleri</h2>
+                    <span class="vs-title__sub">Telefon numarasını girin ve çocuğun hareketlerini görün</span>
+                </div>
+
+                <div class="vs-side-form bg-white p-4 shadow rounded">
+                    <form id="phoneForm">
+                 <div class="vs-side-form__group">
+                    <label class="form-label">Veli Telefon Numarası</label>
+                    <input 
+                        type="tel" 
+                        id="phoneInput" 
+                        class="vs-side-form__input" 
+                        placeholder="Örn: 05321234567"
+                        pattern="\d*"  
+                        required
+                        maxlength="11"
+                        minlength="11"
+                    >
+                   
+                </div>
+
+
+                        <div class="vs-side-form__group--btn text-center mt-3">
+                            <button type="submit" class="vs-btn w-100">
+                                <span class="vs-btn__border"></span>Göster
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="childTable" class="user-list mt-4" style="display:none;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>İSİM</th>
+                                    <th>SOYİSİM</th>
+                                    <th>GİRİŞ SAATİ</th>
+                                    <th>ÇIKIŞ SAATİ</th>
+                                    <th>TARİH</th>
+                                </tr>
+                            </thead>
+                            <tbody id="childTableBody">
+                                <!-- Veriler buraya JS ile eklenecek -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .vs-side-form__input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+
+    .vs-side-form__input:focus {
+        border-color: #4a90e2;
+        outline: none;
+        box-shadow: 0 0 5px rgba(74,144,226,0.5);
+    }
+
+    .user-list table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .user-list th, .user-list td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .user-list thead th {
+        background-color: #4a90e2;
+        color: #fff;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .user-list tbody tr {
+        background-color: #f9f9f9;
+        transition: background-color 0.3s;
+    }
+
+    .user-list tbody tr:nth-child(even) {
+        background-color: #f1f1f1;
+    }
+
+    .user-list tbody tr:hover {
+        background-color: #e0f0ff;
+    }
+
+    .user-list td {
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Responsive */
+</style>
+
+
+<script>
+    const phoneForm = document.getElementById('phoneForm');
+    const childTable = document.getElementById('childTable');
+    const phoneInput = document.getElementById('phoneInput');
+    const childTableBody = document.getElementById('childTableBody');
+
+    phoneForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const phone = phoneInput.value.trim();
+        if (!phone) {
+            alert("Lütfen telefon numarasını girin.");
+            return;
+        }
+
+        try {
+            // Backend'e AJAX isteği
+            const response = await fetch(`veli/Children?parentPhone=${phone}`);
+            if (!response.ok) throw new Error("Veri alınamadı.");
+
+            const data = await response.json();
+
+            // Tabloyu temizle
+            childTableBody.innerHTML = "";
+
+            if (!data || data.length === 0) {
+                childTableBody.innerHTML = `<tr><td colspan="5">Bu telefon numarasına ait çocuk bulunamadı.</td></tr>`;
+            } else {
+data.forEach(child => {
+    const row = `
+        <tr>
+            <td data-label="İsim">${child.firstName}</td>
+            <td data-label="Soyisim">${child.lastName}</td>
+            <td data-label="Giriş Saati">${new Date(child.arrivalTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+            <td data-label="Çıkış Saati">${new Date(new Date(child.arrivalTime).getTime() + child.durationMinutes*60000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+            <td data-label="Tarih">${new Date(child.arrivalTime).toLocaleDateString()}</td>
+        </tr>`;
+    childTableBody.insertAdjacentHTML('beforeend', row);
+});
+
+            }
+
+            // Tabloyu göster
+            childTable.style.display = 'block';
+        } catch (error) {
+            alert("Bir hata oluştu: " + error.message);
+        }
+    });
+</script>

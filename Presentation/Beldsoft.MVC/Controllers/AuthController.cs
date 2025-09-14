@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Beldsoft.MVC.Controllers
 {
+    [Route("yonetim")]
     public class AuthController : Controller
     {
         private readonly IMediator _mediator;
@@ -14,14 +15,15 @@ namespace Beldsoft.MVC.Controllers
             _mediator = mediator;
         }
 
-        // GET: Login formu direkt /login
-        [HttpGet("/login")]
+        // GET: /yonetim/giris
+        [HttpGet("giris")]
         public IActionResult Login()
         {
             return View();
         }
 
-        [HttpPost("/login")]
+        // POST: /yonetim/giris
+        [HttpPost("giris")]
         public async Task<IActionResult> Login(AppUserLoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -37,7 +39,6 @@ namespace Beldsoft.MVC.Controllers
 
             if (!result.Succeeded)
             {
-                // Error listesini ModelState'e ekle
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error);
@@ -49,10 +50,9 @@ namespace Beldsoft.MVC.Controllers
             var loginData = result.Data;
 
             if (loginData.Role == "Admin")
-                return RedirectToAction("Index", "AdminHome");
+                return RedirectToAction("Index", "Child", new { area = "Admin" });
 
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

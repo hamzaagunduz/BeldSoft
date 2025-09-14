@@ -28,34 +28,6 @@ namespace Beldsoft.MVC.Controllers
             return View(model);
         }
 
-        // Yeni kullanıcı - GET
-        [HttpGet("/register")]
-        public IActionResult Register()
-        {
-            return View();
-        }
 
-        // Yeni kullanıcı - POST
-        [HttpPost("/register")]
-        public async Task<IActionResult> Register(AppUserCreateViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            var command = _mapper.Map<CreateAppUserCommand>(model);
-            var result = await _mediator.Send(command);
-
-
-
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
-                    ModelState.AddModelError(string.Empty, error);
-
-                return View(model);
-            }
-
-            return RedirectToAction("Login", "Auth");
-        }
     }
 }

@@ -4,24 +4,40 @@
     ViewData["Title"] = "Giriş Yap";
 }
 
-<h2>Giriş Yap</h2>
+<section class="vs-event--page bg-color6 space z-index-common">
 
-<form asp-action="Login" method="post">
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="vs-title text-center title-anime animation-style2 mb-4">
+                    <h2 class="vs-title__main">Giriş Yap</h2>
+                    <span class="vs-title__sub">Hesabınıza erişmek için bilgilerinizi giriniz</span>
+                </div>
+
+                <form asp-action="Login" method="post" class="vs-side-form bg-white p-4 shadow rounded">
+                    <div class="vs-side-form__group">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="vs-side-form__input" placeholder="" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="vs-side-form__group">
+                        <label asp-for="Password" class="form-label"></label>
+                        <input asp-for="Password" type="password" class="vs-side-form__input" placeholder="" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="vs-side-form__group--btn text-center mt-4">
+                        <button type="submit" class="vs-btn w-100">
+                            <span class="vs-btn__border"></span>Giriş Yap
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>
+</section>
 
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
 
-    <button type="submit" class="btn btn-primary">Giriş Yap</button>
-</form>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
