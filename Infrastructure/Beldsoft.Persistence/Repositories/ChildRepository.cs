@@ -54,5 +54,21 @@ namespace Beldsoft.Persistence.Repositories
                 .Where(c => c.ParentPhone == parentPhone)
                 .ToListAsync();
         }
+
+        public async Task<List<Child>> GetChildrenPagedAsync(int pageNumber, int pageSize)
+        {
+            if (pageNumber < 1) pageNumber = 1;
+
+            return await _context.Childs
+                .OrderByDescending(c => c.Id) // en son eklenen en başta
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _context.Childs.CountAsync();
+        }
     }
 }

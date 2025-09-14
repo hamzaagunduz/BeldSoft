@@ -11,6 +11,9 @@ namespace Beldsoft.Application.Interfaces.IChildRepository
     {
         Task<List<Child>> GetChildrenForTodayAsync();
         Task<List<Child>> GetChildrenByParentPhoneAsync(string parentPhone);
+        Task<List<Child>> GetChildrenPagedAsync(int pageNumber, int pageSize);
+
+        Task<int> CountAsync();
 
     }
 }

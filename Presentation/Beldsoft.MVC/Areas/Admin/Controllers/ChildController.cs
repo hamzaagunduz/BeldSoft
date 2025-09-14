@@ -5,6 +5,7 @@ using Beldsoft.Application.Features.Child.Commands.UpdateChild;
 using Beldsoft.Application.Features.Child.Queries.GetAllChild;
 using Beldsoft.Application.Features.Child.Queries.GetAllChildForToday;
 using Beldsoft.Application.Features.Child.Queries.GetChildById;
+using Beldsoft.Application.Features.Child.Queries.GetPagedChild;
 using Beldsoft.MVC.ViewModels.Child;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -106,5 +107,8 @@ namespace Beldsoft.MVC.Areas.Admin.Controllers
             TempData["Success"] = "Çocuk kaydı başarıyla silindi.";
             return RedirectToAction(nameof(Index));
         }
+
+
+
     }
 }
